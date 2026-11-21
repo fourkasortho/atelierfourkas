@@ -60,7 +60,7 @@ h1,h2,h3{font-family:var(--display);font-weight:400;margin:0;text-wrap:balance}
 /* ===== Prologue: the lamp ===== */
 .prologue{position:relative;min-height:max(620px,100svh);display:grid;place-items:center;overflow:hidden;background:var(--marble);isolation:isolate;cursor:crosshair}
 .prologue::before{content:"";position:absolute;inset:-35%;z-index:-2;opacity:.5;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='800'%3E%3Cfilter id='m'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.0025 .009' numOctaves='6' seed='11' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .55 0 0 0 0 .53 0 0 0 0 .5 0 0 0 -3.2 1.55'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23m)'/%3E%3C/svg%3E");background-size:1100px;transform:rotate(-8deg)}
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='800'%3E%3Cfilter id='m'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.0025 .009' numOctaves='4' seed='11' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .55 0 0 0 0 .53 0 0 0 0 .5 0 0 0 -3.2 1.55'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23m)'/%3E%3C/svg%3E");background-size:1100px;transform:rotate(-8deg)}
 .lit{position:absolute;inset:0;z-index:-1;pointer-events:none;
   -webkit-mask-image:radial-gradient(circle 190px at var(--lx,50%) var(--ly,42%),#000 0%,rgba(0,0,0,.55) 45%,transparent 100%);
           mask-image:radial-gradient(circle 190px at var(--lx,50%) var(--ly,42%),#000 0%,rgba(0,0,0,.55) 45%,transparent 100%)}
@@ -78,10 +78,10 @@ h1,h2,h3{font-family:var(--display);font-weight:400;margin:0;text-wrap:balance}
 .down{position:absolute;bottom:26px;left:50%;transform:translateX(-50%);font-size:11px;letter-spacing:.3em;color:var(--dust);text-decoration:none;text-transform:uppercase}
 
 /* ===== Act I: letters come into alignment ===== */
-.smile{position:relative;height:260vh;background:var(--night)}
+.smile{position:relative;height:180vh;background:var(--night)}
 .smile .stage{position:sticky;top:0;height:100vh;height:100svh;display:grid;grid-template-columns:1.618fr 1fr;align-items:center;gap:40px}
 .arcbox{position:relative;width:100%;aspect-ratio:1.618/1;max-width:100%}
-.arcbox .ltr{position:absolute;left:0;top:0;font-family:var(--display);font-size:clamp(38px,6.4vw,92px);line-height:1;color:var(--bone);will-change:transform;transform-origin:50% 50%}
+.arcbox .ltr{position:absolute;left:0;top:0;transition:transform .12s linear;font-family:var(--display);font-size:clamp(38px,6.4vw,92px);line-height:1;color:var(--bone);will-change:transform;transform-origin:50% 50%}
 .arcbox svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
 .arcbox .wire{fill:none;stroke:var(--gold);stroke-width:1.2;stroke-dasharray:1;stroke-dashoffset:1;opacity:.9}
 .smile .text{display:flex;flex-direction:column;gap:22px;min-width:0}
@@ -91,7 +91,7 @@ h1,h2,h3{font-family:var(--display);font-weight:400;margin:0;text-wrap:balance}
 .meter b{display:block;height:1px;width:120px;background:var(--vein);position:relative;overflow:hidden}
 .meter b::after{content:"";position:absolute;inset:0;background:var(--gold);transform-origin:left;transform:scaleX(var(--p,0))}
 @media (max-width:860px){
-  .smile{height:240vh}
+  .smile{height:165vh}
   .smile .stage{grid-template-columns:1fr;align-content:center;gap:18px}
   .smile .text p:nth-of-type(2){display:none}
 }
@@ -438,11 +438,13 @@ html{-webkit-tap-highlight-color:transparent;-webkit-text-size-adjust:100%}
   function lampLoop(now){
     if(now-manual>hold){var k=(now-t0)/1000;tx=50+34*Math.sin(k*.23);ty=46+30*Math.sin(k*.37+1)}
     lx+=(tx-lx)*.08;ly+=(ty-ly)*.08;
-    pro.style.setProperty('--lx',lx+'%');pro.style.setProperty('--ly',ly+'%');
-    lit.style.setProperty('--lx',lx+'%');lit.style.setProperty('--ly',ly+'%');
-    requestAnimationFrame(lampLoop);
+    pro.style.setProperty('--lx',lx.toFixed(2)+'%');pro.style.setProperty('--ly',ly.toFixed(2)+'%');
+    if(proVisible)requestAnimationFrame(lampLoop);else looping=false;
   }
-  if(!reduce)requestAnimationFrame(lampLoop);else{lit.style.webkitMaskImage='none';lit.style.maskImage='none';lit.style.opacity=.45}
+  var proVisible=true,looping=false;
+  function startLamp(){if(!looping&&!reduce){looping=true;requestAnimationFrame(lampLoop)}}
+  if('IntersectionObserver' in window)new IntersectionObserver(function(es){proVisible=es[0].isIntersecting;if(proVisible)startLamp()}).observe(pro);
+  if(!reduce)startLamp();else{lit.style.webkitMaskImage='none';lit.style.maskImage='none';lit.style.opacity=.45}
 
   /* ---------- Act I: letters align along the arc ---------- */
   var box=document.getElementById('arcbox'),wire=document.getElementById('wire'),sec=document.getElementById('act1');
@@ -462,14 +464,17 @@ html{-webkit-tap-highlight-color:transparent;-webkit-text-size-adjust:100%}
     return [x,y,Math.atan2(dy,dx)*180/Math.PI];
   }
   function ease(x){return x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2}
+  var sizes=[],boxW=0,boxH=0;
+  function measure(){boxW=box.clientWidth;boxH=box.clientHeight;sizes=letters.map(function(el){return [el.offsetWidth,el.offsetHeight]})}
   function layout(p){
-    var W=box.clientWidth,H=box.clientHeight,n=letters.length,e=ease(p);
+    if(!boxW)measure();
+    var W=boxW,H=boxH,n=letters.length,e=ease(p);
     letters.forEach(function(el,i){
       var t=.1+.8*(i/(n-1)),b=bez(t);
-      var fx=b[0]/1618*W,fy=b[1]/1000*H-el.offsetHeight*.95;
+      var fx=b[0]/1618*W,fy=b[1]/1000*H-sizes[i][1]*.95;
       var sx=fx+scatter[i].dx*W,sy=fy+scatter[i].dy*H;
       var x=sx+(fx-sx)*e,y=sy+(fy-sy)*e,r=scatter[i].rot+(b[2]-scatter[i].rot)*e;
-      el.style.transform='translate('+(x-el.offsetWidth/2)+'px,'+y+'px) rotate('+r+'deg)';
+      el.style.transform='translate('+(x-sizes[i][0]/2).toFixed(1)+'px,'+y.toFixed(1)+'px) rotate('+r.toFixed(2)+'deg)';
       el.style.color=e>.98?'var(--bone)':'';
     });
     wire.style.strokeDashoffset=String(1-Math.max(0,(e-.55)/.45));
@@ -477,8 +482,8 @@ html{-webkit-tap-highlight-color:transparent;-webkit-text-size-adjust:100%}
   }
   function progress(){
     if(reduce)return 1;
-    var r=sec.getBoundingClientRect(),span=sec.offsetHeight-window.innerHeight;
-    return Math.min(1,Math.max(0,-r.top/(span*.8)));
+    var r=sec.getBoundingClientRect(),vh=window.innerHeight,span=sec.offsetHeight-vh,start=vh*.55;
+    return Math.min(1,Math.max(0,(start-r.top)/(start+span*.6)));
   }
 
   /* ---------- Act II: spiral and digits ---------- */
@@ -497,8 +502,8 @@ html{-webkit-tap-highlight-color:transparent;-webkit-text-size-adjust:100%}
   }
   spiral.style.strokeDasharray='1';
   window.addEventListener('scroll',onScroll,{passive:true});
-  var lastW=window.innerWidth;window.addEventListener('resize',function(){onScroll();if((window.innerWidth<700)!==(lastW<700))buildCarvings();lastW=window.innerWidth});
-  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(onScroll);
+  var lastW=window.innerWidth;window.addEventListener('resize',function(){measure();onScroll();if((window.innerWidth<700)!==(lastW<700))buildCarvings();lastW=window.innerWidth});
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(function(){measure();onScroll()});
 
   /* ---------- Act V: two doors ---------- */
   var dc=document.getElementById('door-card'),dr=document.getElementById('door-req'),cw=document.getElementById('cardno-wrap'),card=document.getElementById('r-card');
