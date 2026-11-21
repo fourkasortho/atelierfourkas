@@ -132,7 +132,7 @@ h1,h2,h3{font-family:var(--display);font-weight:400;margin:0;text-wrap:balance}
 .cat .head{display:grid;grid-template-columns:1.618fr 1fr;gap:40px;align-items:end;margin-bottom:48px}
 .cat h2{font-size:clamp(30px,3.4vw,48px);line-height:1.12}
 .cat .head p{color:var(--dust);font-size:15px}
-.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--vein);border:1px solid var(--vein)}
+.cards{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--vein);border:1px solid var(--vein)}
 .card{background:var(--marble);padding:26px 22px 28px;display:flex;flex-direction:column;gap:14px;min-width:0;position:relative;overflow:hidden}
 .card .no{font-family:var(--display);color:var(--gold-dim);font-size:14px;letter-spacing:.2em}
 .card h3{font-size:23px;line-height:1.2}
@@ -141,7 +141,7 @@ h1,h2,h3{font-family:var(--display);font-weight:400;margin:0;text-wrap:balance}
 .card dd{margin:0 0 6px;color:var(--bone)}
 .card::after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;background:var(--gold);transform:scaleX(0);transform-origin:left;transition:transform .6s cubic-bezier(.6,.1,.2,1)}
 .card:hover::after{transform:scaleX(1)}
-@media (max-width:1000px){.cards{grid-template-columns:1fr 1fr}}
+@media (max-width:1100px){.cards{grid-template-columns:1fr 1fr}.card:last-child{grid-column:1/-1}}
 @media (max-width:560px){.cards{grid-template-columns:1fr}.cat .head{grid-template-columns:1fr}}
 
 /* ===== Act V: the invitation ===== */
@@ -284,15 +284,20 @@ footer .legal{margin-top:44px;padding-top:18px;border-top:1px solid var(--vein);
       <dl><dt data-en="Material">Υλικό</dt><dd data-en="Clear thermoplastic, made for you from a digital plan">Διάφανο θερμοπλαστικό, κατασκευασμένο για εσάς από ψηφιακό σχέδιο</dd>
       <dt data-en="Visibility">Ορατότητα</dt><dd data-en="Almost none">Σχεδόν καμία</dd>
       <dt data-en="Suited to">Για</dt><dd data-en="Adults and adolescents">Ενήλικες και εφήβους</dd></dl></article>
-    <article class="card"><span class="no">Β</span><h3 data-en="Ceramic brackets">Κεραμικά brackets</h3>
-      <dl><dt data-en="Material">Υλικό</dt><dd data-en="Ceramic in the colour of the tooth">Κεραμικό στο χρώμα του δοντιού</dd>
-      <dt data-en="System">Σύστημα</dt><dd>Damon Ultima</dd>
+    <article class="card"><span class="no">Β</span><h3 data-en="Lingual brackets">Γλωσσικά brackets</h3>
+      <dl><dt data-en="Material">Υλικό</dt><dd data-en="Custom brackets on the inner side of the teeth">Εξατομικευμένα brackets στην εσωτερική πλευρά των δοντιών</dd>
+      <dt data-en="System">Σύστημα</dt><dd>Alias (Ormco)</dd>
+      <dt data-en="Visibility">Ορατότητα</dt><dd data-en="None from the front">Καμία από μπροστά</dd>
       <dt data-en="Suited to">Για</dt><dd data-en="Adults and adolescents">Ενήλικες και εφήβους</dd></dl></article>
-    <article class="card"><span class="no">Γ</span><h3 data-en="Metal brackets">Μεταλλικά brackets</h3>
+    <article class="card"><span class="no">Γ</span><h3 data-en="Ceramic brackets">Κεραμικά brackets</h3>
+      <dl><dt data-en="Material">Υλικό</dt><dd data-en="Ceramic in the colour of the tooth">Κεραμικό στο χρώμα του δοντιού</dd>
+      <dt data-en="System">Σύστημα</dt><dd>Symetri (Ormco)</dd>
+      <dt data-en="Suited to">Για</dt><dd data-en="Adults and adolescents">Ενήλικες και εφήβους</dd></dl></article>
+    <article class="card"><span class="no">Δ</span><h3 data-en="Metal brackets">Μεταλλικά brackets</h3>
       <dl><dt data-en="Material">Υλικό</dt><dd data-en="Metal, for precise control of each movement">Μέταλλο, για ακριβή έλεγχο κάθε κίνησης</dd>
       <dt data-en="System">Σύστημα</dt><dd>Damon Ultima</dd>
       <dt data-en="Suited to">Για</dt><dd data-en="Children, adolescents, adults">Παιδιά, εφήβους, ενήλικες</dd></dl></article>
-    <article class="card"><span class="no">Δ</span><h3 data-en="Early treatment">Πρώιμη θεραπεία</h3>
+    <article class="card"><span class="no">Ε</span><h3 data-en="Preventive treatment guidance">Προληπτική θεραπευτική καθοδήγηση</h3>
       <dl><dt data-en="Material">Υλικό</dt><dd data-en="Growth itself, guided at the right stage">Η ίδια η ανάπτυξη, καθοδηγημένη στο σωστό στάδιο</dd>
       <dt data-en="Concerns">Αφορά</dt><dd data-en="Bite, space and skeletal discrepancies">Σύγκλειση, χώρο και σκελετικές αποκλίσεις</dd>
       <dt data-en="Suited to">Για</dt><dd data-en="Children">Παιδιά</dd></dl></article>
