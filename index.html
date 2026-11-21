@@ -1,0 +1,481 @@
+<!doctype html>
+<html lang="el">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Atelier Ορθοδοντικής Φούρκα</title>
+<meta name="description" content="Ιδιωτικό στούντιο ορθοδοντικής στην Κηφισιά. Πέντε νέες θεραπείες τον μήνα.">
+<meta property="og:title" content="Atelier · Κηφισιά">
+<meta property="og:description" content="Κάποιος σκάλισε αυτό το χαμόγελο πριν από 2.600 χρόνια.">
+<link rel="canonical" href="https://atelierfourkas.com/">
+<meta property="og:url" content="https://atelierfourkas.com/">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<style>html,body{margin:0}[hidden]{display:none!important}</style>
+
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=GFS+Didot&family=Commissioner:wght@200;300;400;500&display=swap">
+<style>
+/* Layout: a night museum of one object. Black marble, a lamp the visitor holds, five acts (Α΄–Ε΄); grids split 1.618 : 1. Single dark look by choice. */
+:root{
+  --night:#0E0D0C;      /* unlit gallery */
+  --marble:#191816;     /* black marble slab */
+  --vein:#2A2825;
+  --bone:#ECE6DA;       /* Pentelic white, as text */
+  --dust:#8F887C;
+  --gold:#E9B422;       /* the yellow attachment of the mark */
+  --gold-dim:#B8933A;
+  --seal-fill:#0E0D0C;
+  --display:"GFS Didot","Didot","Bodoni 72",Georgia,serif;
+  --body:"Commissioner","Helvetica Neue",Arial,sans-serif;
+  --phi:1.618;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;background:var(--night)}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{background:var(--night);color:var(--bone);font-family:var(--body);font-weight:300;font-size:17px;line-height:1.7;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:40;background:var(--night)}
+a{color:inherit}
+:focus-visible{outline:1px solid var(--gold);outline-offset:4px}
+.wrap{max-width:1240px;margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
+p{margin:0;max-width:58ch}
+h1,h2,h3{font-family:var(--display);font-weight:400;margin:0;text-wrap:balance}
+.act{font-family:var(--display);font-size:15px;letter-spacing:.3em;color:var(--gold-dim);display:flex;gap:14px;align-items:center}
+.act::after{content:"";height:1px;width:64px;background:var(--gold-dim);opacity:.6}
+.small{font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:var(--dust);font-weight:400}
+
+/* top bar */
+.bar{position:fixed;top:env(safe-area-inset-top,0px);left:0;right:0;z-index:30;mix-blend-mode:normal;pointer-events:none}
+.bar .wrap{display:flex;justify-content:space-between;align-items:center;padding-block:16px}
+.bar a,.bar button{pointer-events:auto}
+.mark{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--bone)}
+.mark svg{width:38px;height:38px}
+.mark span{font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:var(--dust)}
+.lang{display:flex;gap:2px}
+.lang button{all:unset;cursor:pointer;font-size:11px;letter-spacing:.2em;padding:6px 8px;color:var(--dust);border-bottom:1px solid transparent}
+.lang button[aria-pressed="true"]{color:var(--bone);border-bottom-color:var(--gold)}
+.lang button:focus-visible{outline:1px solid var(--gold)}
+
+/* ===== Prologue: the lamp ===== */
+.prologue{position:relative;min-height:max(620px,100svh);display:grid;place-items:center;overflow:hidden;background:var(--marble);isolation:isolate;cursor:crosshair}
+.prologue::before{content:"";position:absolute;inset:-35%;z-index:-2;opacity:.5;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='800'%3E%3Cfilter id='m'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.0025 .009' numOctaves='6' seed='11' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .55 0 0 0 0 .53 0 0 0 0 .5 0 0 0 -3.2 1.55'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23m)'/%3E%3C/svg%3E");background-size:1100px;transform:rotate(-8deg)}
+.lit{position:absolute;inset:0;z-index:-1;pointer-events:none;
+  -webkit-mask-image:radial-gradient(circle 190px at var(--lx,50%) var(--ly,42%),#000 0%,rgba(0,0,0,.55) 45%,transparent 100%);
+          mask-image:radial-gradient(circle 190px at var(--lx,50%) var(--ly,42%),#000 0%,rgba(0,0,0,.55) 45%,transparent 100%)}
+.lit .glow{position:absolute;inset:0;background:radial-gradient(circle 260px at var(--lx,50%) var(--ly,42%),rgba(236,230,218,.16),transparent 70%)}
+.carve{position:absolute;font-family:var(--display);color:rgba(236,230,218,.72);letter-spacing:.42em;white-space:nowrap;text-shadow:0 1px 0 rgba(0,0,0,.9),0 -1px 0 rgba(255,255,255,.08)}
+.ghost .carve{color:rgba(236,230,218,.045);text-shadow:none}
+.ghost{position:absolute;inset:0;z-index:-1;pointer-events:none}
+.prologue .inner{text-align:center;display:flex;flex-direction:column;align-items:center;gap:26px;padding-block:120px 90px;pointer-events:none}
+.prologue h1{font-size:clamp(34px,5.6vw,76px);line-height:1.08;max-width:15ch}
+.prologue h1 em{font-style:normal;color:var(--gold)}
+.prologue .sub{color:var(--dust);font-size:clamp(15px,1.4vw,18px);max-width:44ch}
+.hint{display:flex;gap:10px;align-items:center;color:var(--dust);font-size:12px;letter-spacing:.22em;text-transform:uppercase}
+.hint i{width:8px;height:8px;border-radius:50%;background:var(--gold);box-shadow:0 0 18px 4px rgba(233,180,34,.45);animation:breathe 2.6s ease-in-out infinite}
+@keyframes breathe{50%{opacity:.35;transform:scale(.7)}}
+.down{position:absolute;bottom:26px;left:50%;transform:translateX(-50%);font-size:11px;letter-spacing:.3em;color:var(--dust);text-decoration:none;text-transform:uppercase}
+
+/* ===== Act I: letters come into alignment ===== */
+.smile{position:relative;height:260vh;background:var(--night)}
+.smile .stage{position:sticky;top:0;height:100vh;height:100svh;display:grid;grid-template-columns:1.618fr 1fr;align-items:center;gap:40px}
+.arcbox{position:relative;width:100%;aspect-ratio:1.618/1;max-width:100%}
+.arcbox .ltr{position:absolute;left:0;top:0;font-family:var(--display);font-size:clamp(38px,6.4vw,92px);line-height:1;color:var(--bone);will-change:transform;transform-origin:50% 50%}
+.arcbox svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.arcbox .wire{fill:none;stroke:var(--gold);stroke-width:1.2;stroke-dasharray:1;stroke-dashoffset:1;opacity:.9}
+.smile .text{display:flex;flex-direction:column;gap:22px;min-width:0}
+.smile h2{font-size:clamp(28px,3vw,42px);line-height:1.15}
+.smile .text p{color:#BDB6A9}
+.meter{display:flex;align-items:center;gap:12px;font-size:12px;letter-spacing:.2em;color:var(--dust);font-variant-numeric:tabular-nums}
+.meter b{display:block;height:1px;width:120px;background:var(--vein);position:relative;overflow:hidden}
+.meter b::after{content:"";position:absolute;inset:0;background:var(--gold);transform-origin:left;transform:scaleX(var(--p,0))}
+@media (max-width:860px){
+  .smile{height:240vh}
+  .smile .stage{grid-template-columns:1fr;align-content:center;gap:18px}
+  .smile .text p:nth-of-type(2){display:none}
+}
+
+/* ===== Act II: Φ ===== */
+.phi{background:var(--marble);padding-block:clamp(90px,12vw,160px);position:relative;overflow:hidden}
+.phi .grid{display:grid;grid-template-columns:1.618fr 1fr;gap:clamp(32px,5vw,80px);align-items:center}
+.phi .big{font-family:var(--display);font-size:clamp(160px,30vw,420px);line-height:.8;color:var(--bone);position:relative;display:inline-block}
+.phi .big svg{position:absolute;inset:-6% -18%;width:136%;height:112%;overflow:visible}
+.phi .big .spiral{fill:none;stroke:var(--gold);stroke-width:1.4}
+.phi .big .rects{fill:none;stroke:var(--vein);stroke-width:1}
+.digits{font-family:var(--display);font-size:clamp(20px,2.2vw,28px);letter-spacing:.06em;color:var(--gold);font-variant-numeric:tabular-nums;word-break:break-all;min-height:1.4em}
+.phi .text{display:flex;flex-direction:column;gap:22px;min-width:0}
+.phi h2{font-size:clamp(30px,3.4vw,48px);line-height:1.12}
+.phi .text p{color:#BDB6A9}
+.phi .aside{font-size:13px;color:var(--dust);border-top:1px solid var(--vein);padding-top:16px;max-width:46ch}
+@media (max-width:860px){.phi .grid{grid-template-columns:1fr}.phi .big{justify-self:center}}
+
+/* ===== Act III: five ===== */
+.five{padding-block:clamp(90px,12vw,160px)}
+.five .grid{display:grid;grid-template-columns:1fr 1.618fr;gap:clamp(32px,5vw,80px);align-items:start}
+.numeral{font-family:var(--display);font-size:clamp(120px,20vw,280px);line-height:.85;color:var(--bone)}
+.numeral sup{font-size:.3em;color:var(--gold);vertical-align:top;margin-left:.08em}
+.seals{display:flex;gap:14px;margin-top:22px;flex-wrap:wrap}
+.seals svg{width:46px;height:46px;color:var(--bone);opacity:.75;transition:color .4s,transform .4s}
+.seals svg:hover{color:var(--gold);transform:rotate(-8deg)}
+.five h2{font-size:clamp(30px,3.4vw,48px);line-height:1.12;margin-bottom:22px}
+.five .lead{color:#BDB6A9;margin-bottom:44px}
+.vows{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--vein)}
+.vows div{padding:22px 22px 0 0;display:flex;flex-direction:column;gap:8px;min-width:0}
+.vows div+div{padding-left:22px;border-left:1px solid var(--vein)}
+.vows h3{font-size:22px}
+.vows p{font-size:15px;color:var(--dust)}
+@media (max-width:860px){.five .grid{grid-template-columns:1fr}.vows{grid-template-columns:1fr}.vows div+div{padding-left:0;border-left:0;border-top:1px solid var(--vein)}.vows div{padding-bottom:22px}}
+
+/* ===== Act IV: catalogue ===== */
+.cat{background:var(--marble);padding-block:clamp(90px,12vw,160px)}
+.cat .head{display:grid;grid-template-columns:1.618fr 1fr;gap:40px;align-items:end;margin-bottom:48px}
+.cat h2{font-size:clamp(30px,3.4vw,48px);line-height:1.12}
+.cat .head p{color:var(--dust);font-size:15px}
+.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--vein);border:1px solid var(--vein)}
+.card{background:var(--marble);padding:26px 22px 28px;display:flex;flex-direction:column;gap:14px;min-width:0;position:relative;overflow:hidden}
+.card .no{font-family:var(--display);color:var(--gold-dim);font-size:14px;letter-spacing:.2em}
+.card h3{font-size:23px;line-height:1.2}
+.card dl{margin:0;display:grid;gap:8px;font-size:13.5px}
+.card dt{font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--dust)}
+.card dd{margin:0 0 6px;color:var(--bone)}
+.card::after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;background:var(--gold);transform:scaleX(0);transform-origin:left;transition:transform .6s cubic-bezier(.6,.1,.2,1)}
+.card:hover::after{transform:scaleX(1)}
+@media (max-width:1000px){.cards{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.cards{grid-template-columns:1fr}.cat .head{grid-template-columns:1fr}}
+
+/* ===== Act V: the invitation ===== */
+.inv{padding-block:clamp(90px,12vw,160px)}
+.inv .grid{display:grid;grid-template-columns:1fr 1.618fr;gap:clamp(32px,5vw,80px)}
+.inv h2{font-size:clamp(32px,3.8vw,54px);line-height:1.1;margin-block:18px 20px}
+.inv .lead{color:#BDB6A9}
+.doors{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:28px}
+.door{all:unset;box-sizing:border-box;cursor:pointer;border:1px solid var(--vein);padding:22px;display:flex;flex-direction:column;gap:8px;transition:border-color .3s,background .3s;min-width:0}
+.door b{font-family:var(--display);font-weight:400;font-size:21px;line-height:1.2}
+.door span{font-size:13.5px;color:var(--dust)}
+.door:hover{border-color:var(--dust)}
+.door[aria-pressed="true"]{border-color:var(--gold);background:rgba(233,180,34,.05)}
+.door:focus-visible{outline:1px solid var(--gold);outline-offset:3px}
+form{display:grid;grid-template-columns:1fr 1fr;gap:22px 26px}
+.f{display:flex;flex-direction:column;gap:6px;min-width:0}
+.f.full{grid-column:1/-1}
+label{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--dust)}
+input,select,textarea{font:inherit;font-weight:300;color:var(--bone);background:transparent;border:0;border-bottom:1px solid #4A463F;padding:9px 0;border-radius:0;width:100%}
+select option{background:var(--night)}
+textarea{resize:vertical;min-height:80px}
+input:focus,select:focus,textarea:focus{outline:none;border-bottom-color:var(--gold)}
+.cardno input{font-family:var(--display);font-size:30px;letter-spacing:.4em;color:var(--gold)}
+.consent{grid-column:1/-1;display:flex;gap:10px;align-items:flex-start;font-size:14px;color:var(--dust);text-transform:none;letter-spacing:0}
+.consent input{width:auto;margin-top:6px;accent-color:var(--gold)}
+.send{all:unset;cursor:pointer;font-size:12px;letter-spacing:.26em;text-transform:uppercase;border:1px solid var(--gold);color:var(--bone);padding:15px 26px;transition:background .3s,color .3s}
+.send:hover{background:var(--gold);color:var(--night)}
+.send:focus-visible{outline:1px solid var(--bone);outline-offset:3px}
+.send[disabled]{opacity:.5;cursor:wait}
+.status{grid-column:1/-1;border-left:2px solid var(--gold);padding:6px 0 6px 16px;font-size:15px}
+@media (max-width:860px){.inv .grid{grid-template-columns:1fr}}
+@media (max-width:560px){form{grid-template-columns:1fr}.doors{grid-template-columns:1fr}}
+
+footer{border-top:1px solid var(--vein);padding-block:56px 64px;color:var(--dust);font-size:14px}
+footer .grid{display:grid;grid-template-columns:auto 1fr 1fr 1fr;gap:36px;align-items:start}
+footer svg{width:84px;height:84px;color:var(--bone)}
+footer h4{margin:0 0 10px;font-size:10.5px;letter-spacing:.24em;text-transform:uppercase;font-weight:400;color:var(--bone)}
+footer .legal{margin-top:44px;padding-top:18px;border-top:1px solid var(--vein);font-size:12px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+@media (max-width:860px){footer .grid{grid-template-columns:1fr 1fr}}
+@media (max-width:480px){footer .grid{grid-template-columns:1fr}}
+
+@media (prefers-reduced-motion:reduce){.hint i{animation:none}.card::after{transition:none}}
+</style>
+</head>
+<body>
+
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="seal" viewBox="0 0 1000 1000"><defs><clipPath id="mc"><path clip-rule="evenodd" d="M-5000,-5000 H5000 V5000 H-5000 Z M490,68 C506,68 522,95 521,130 C520,165 512,200 503,227 L494,236 C486,272 474,312 456,350 C432,400 398,442 366,443 C350,443 350,400 354,360 C359,312 372,268 386,236 C391,224 383,216 385,206 C388,196 397,188 408,176 C432,147 458,100 474,80 C479,73 484,68 490,68 Z" transform="translate(500,504) scale(1.12) rotate(-18.3) translate(-436,-255)"/></clipPath></defs><path d="M331.64,329.65 L331.73,328.57 L331.86,327.52 L332.02,326.46 L332.21,325.41 L332.43,324.36 L332.69,323.31 L332.97,322.26 L333.29,321.21 L333.64,320.17 L334.02,319.12 L334.43,318.08 L334.87,317.04 L335.34,316.01 L335.84,314.97 L336.38,313.94 L336.94,312.91 L337.54,311.88 L338.16,310.85 L338.81,309.83 L339.50,308.81 L340.21,307.79 L340.96,306.77 L341.73,305.76 L342.53,304.74 L343.37,303.74 L344.23,302.73 L345.12,301.73 L346.04,300.73 L346.99,299.73 L347.97,298.74 L348.98,297.76 L350.03,296.78 L351.10,295.80 L352.20,294.84 L353.33,293.88 L354.49,292.92 L355.68,291.98 L356.90,291.04 L358.15,290.11 L359.42,289.18 L360.73,288.27 L362.06,287.36 L363.42,286.46 L364.80,285.57 L366.22,284.69 L367.66,283.82 L369.12,282.96 L370.61,282.11 L372.13,281.27 L373.67,280.44 L375.24,279.61 L376.83,278.80 L378.45,278.00 L380.09,277.21 L381.75,276.44 L383.44,275.67 L385.15,274.92 L386.88,274.17 L388.63,273.44 L390.41,272.72 L392.20,272.02 L394.02,271.32 L395.86,270.64 L397.72,269.98 L399.59,269.32 L401.49,268.68 L403.40,268.05 L405.34,267.44 L407.29,266.84 L409.26,266.25 L411.24,265.68 L413.25,265.12 L415.26,264.57 L417.30,264.04 L419.35,263.53 L421.41,263.03 L423.49,262.54 L425.58,262.07 L427.69,261.62 L429.81,261.18 L431.94,260.75 L434.08,260.34 L436.24,259.95 L438.40,259.57 L440.58,259.21 L442.76,258.86 L444.96,258.53 L447.17,258.22 L449.38,257.92 L451.60,257.64 L453.83,257.37 L456.07,257.12 L458.31,256.89 L460.56,256.68 L462.82,256.48 L465.08,256.29 L467.34,256.13 L469.61,255.98 L471.89,255.85 L474.16,255.73 L476.44,255.63 L478.72,255.55 L481.01,255.49 L483.29,255.44 L485.58,255.41 L487.86,255.40 L490.15,255.40 L492.43,255.42 L494.71,255.46 L497.00,255.51 L499.27,255.59 L501.55,255.68 L503.82,255.78 L506.09,255.91 L508.36,256.05 L510.62,256.21 L512.87,256.38 L515.12,256.57 L517.36,256.78 L519.60,257.01 L521.83,257.25 L524.05,257.51 L526.26,257.79 L528.46,258.08 L530.66,258.39 L532.84,258.72 L535.02,259.06 L537.18,259.42 L539.34,259.80 L541.48,260.19 L543.61,260.60 L545.72,261.03 L547.83,261.47 L549.92,261.93 L551.99,262.40 L554.05,262.90 L556.10,263.40 L558.13,263.92 L560.15,264.46 L562.15,265.02 L564.13,265.58 L566.09,266.17 L568.04,266.77 L569.97,267.38 L571.89,268.01 L573.78,268.66 L575.65,269.31 L577.51,269.99 L579.34,270.68 L581.15,271.38 L582.95,272.09 L584.72,272.83 L586.47,273.57 L588.20,274.33 L589.90,275.10 L591.58,275.88 L593.24,276.68 L594.88,277.49 L596.49,278.32 L598.08,279.15 L599.64,280.00 L601.18,280.86 L602.70,281.73 L604.18,282.62 L605.64,283.51 L607.08,284.42 L608.49,285.34 L609.87,286.27 L611.23,287.21 L612.55,288.17 L613.85,289.13 L615.12,290.10 L616.37,291.08 L617.58,292.07 L618.77,293.08 L619.92,294.09 L621.05,295.11 L622.15,296.14 L623.22,297.17 L624.26,298.22 L625.26,299.27 L626.24,300.33 L627.19,301.40 L628.11,302.48 L628.99,303.56 L629.85,304.65 L630.67,305.75 L631.46,306.85 L632.22,307.96 L632.95,309.08 L633.65,310.20 L634.31,311.33 L634.95,312.46 L635.55,313.60 L636.12,314.74 L636.65,315.89 L637.16,317.04 L637.63,318.19 L638.07,319.35 L638.48,320.51 L638.86,321.68 L639.20,322.85 L639.51,324.02 L639.79,325.20 L640.04,326.37 L640.25,327.55 L640.43,328.74 L640.58,329.92 L640.03,331.20 L644.81,330.73 L644.02,329.54 L643.85,328.26 L643.66,326.98 L643.43,325.71 L643.16,324.44 L642.86,323.18 L642.53,321.92 L642.16,320.66 L641.76,319.41 L641.32,318.16 L640.85,316.92 L640.34,315.69 L639.80,314.46 L639.23,313.23 L638.62,312.02 L637.98,310.81 L637.31,309.61 L636.60,308.41 L635.86,307.22 L635.09,306.04 L634.29,304.87 L633.46,303.71 L632.59,302.55 L631.69,301.40 L630.76,300.27 L629.80,299.14 L628.81,298.02 L627.78,296.91 L626.73,295.81 L625.65,294.71 L624.54,293.63 L623.39,292.56 L622.22,291.50 L621.02,290.45 L619.79,289.42 L618.53,288.39 L617.24,287.37 L615.93,286.37 L614.59,285.37 L613.22,284.39 L611.82,283.42 L610.40,282.46 L608.95,281.52 L607.47,280.58 L605.97,279.66 L604.44,278.75 L602.89,277.86 L601.31,276.97 L599.71,276.10 L598.08,275.25 L596.43,274.40 L594.76,273.57 L593.06,272.76 L591.34,271.96 L589.60,271.17 L587.84,270.40 L586.05,269.64 L584.25,268.89 L582.42,268.16 L580.57,267.45 L578.70,266.75 L576.82,266.06 L574.91,265.39 L572.98,264.73 L571.04,264.09 L569.08,263.47 L567.10,262.86 L565.10,262.27 L563.08,261.69 L561.05,261.13 L559.01,260.58 L556.94,260.05 L554.87,259.54 L552.78,259.04 L550.67,258.56 L548.55,258.09 L546.42,257.64 L544.27,257.21 L542.12,256.80 L539.95,256.40 L537.76,256.02 L535.57,255.65 L533.37,255.30 L531.16,254.97 L528.93,254.66 L526.70,254.36 L524.46,254.08 L522.22,253.82 L519.96,253.57 L517.70,253.34 L515.43,253.13 L513.15,252.94 L510.87,252.76 L508.59,252.60 L506.29,252.46 L504.00,252.33 L501.70,252.22 L499.40,252.13 L497.09,252.06 L494.79,252.00 L492.48,251.97 L490.17,251.94 L487.85,251.94 L485.54,251.95 L483.23,251.98 L480.92,252.03 L478.61,252.10 L476.31,252.18 L474.00,252.28 L471.70,252.40 L469.40,252.53 L467.10,252.68 L464.81,252.85 L462.53,253.03 L460.24,253.23 L457.97,253.45 L455.70,253.69 L453.44,253.94 L451.18,254.21 L448.93,254.49 L446.69,254.80 L444.46,255.11 L442.24,255.45 L440.02,255.80 L437.82,256.16 L435.63,256.55 L433.45,256.95 L431.28,257.36 L429.12,257.79 L426.97,258.24 L424.84,258.70 L422.72,259.17 L420.61,259.67 L418.52,260.17 L416.44,260.70 L414.38,261.23 L412.33,261.78 L410.30,262.35 L408.29,262.93 L406.29,263.53 L404.31,264.14 L402.34,264.76 L400.40,265.40 L398.47,266.05 L396.56,266.72 L394.67,267.40 L392.80,268.09 L390.96,268.79 L389.13,269.51 L387.32,270.25 L385.53,270.99 L383.77,271.75 L382.03,272.52 L380.30,273.30 L378.61,274.09 L376.93,274.90 L375.28,275.71 L373.65,276.54 L372.05,277.38 L370.47,278.23 L368.92,279.10 L367.39,279.97 L365.89,280.85 L364.41,281.75 L362.96,282.65 L361.53,283.57 L360.13,284.49 L358.76,285.43 L357.42,286.37 L356.10,287.32 L354.81,288.29 L353.55,289.26 L352.32,290.24 L351.12,291.22 L349.94,292.22 L348.80,293.23 L347.68,294.24 L346.59,295.26 L345.54,296.29 L344.51,297.32 L343.52,298.36 L342.55,299.41 L341.62,300.47 L340.73,301.54 L339.86,302.61 L339.03,303.69 L338.23,304.78 L337.47,305.88 L336.74,306.98 L336.05,308.08 L335.39,309.19 L334.76,310.31 L334.17,311.43 L333.62,312.55 L333.10,313.68 L332.62,314.81 L332.17,315.94 L331.76,317.08 L331.38,318.21 L331.04,319.35 L330.74,320.49 L330.47,321.62 L330.24,322.76 L330.04,323.90 L329.88,325.03 L329.75,326.17 L329.66,327.30 L329.61,328.43 L329.59,329.54 Z" fill="currentColor" clip-path="url(#mc)"/><g transform="translate(500,504) scale(1.12) rotate(-18.3) translate(-436,-255)" fill="none" stroke="currentColor" stroke-linejoin="round" stroke-linecap="round"><path d="M419.5,146.5 L450,97.5 L461.5,96.5 L432.5,143 Z" fill="var(--gold)" stroke="none"/><path d="M418.5,166 L419.5,146.5 L450,97.5 L461.5,96.5 L432.5,143" stroke-width="2.55"/><path d="M490,68 C506,68 522,95 521,130 C520,165 512,200 503,227 L494,236 C486,272 474,312 456,350 C432,400 398,442 366,443 C350,443 350,400 354,360 C359,312 372,268 386,236 C391,224 383,216 385,206 C388,196 397,188 408,176 C432,147 458,100 474,80 C479,73 484,68 490,68 Z" stroke-width="4.64"/></g><g transform="translate(500,504) scale(1.12) rotate(-18.3) translate(-436,-255)"><path d="M518.5,162.5 Q527.5,164.5 536.5,166.5 L522.5,227 Q513.5,225.5 504.5,222.5 Z" fill="var(--seal-fill)" stroke="currentColor" stroke-width="2.55" stroke-linejoin="round"/></g><path d="M350.83,366.06 L349.72,365.16 L348.65,364.25 L347.60,363.34 L346.58,362.41 L345.59,361.48 L344.63,360.54 L343.71,359.59 L342.81,358.64 L341.95,357.67 L341.12,356.70 L340.32,355.72 L339.55,354.74 L338.81,353.74 L338.11,352.74 L337.47,351.71 L336.86,350.68 L336.29,349.65 L335.76,348.60 L335.26,347.56 L334.79,346.51 L334.36,345.46 L333.97,344.41 L333.61,343.35 L333.29,342.30 L333.00,341.24 L332.74,340.18 L332.52,339.12 L332.33,338.07 L332.18,337.01 L332.06,335.95 L331.97,334.90 L331.92,333.84 L331.90,332.79 L331.91,331.74 L331.96,330.69 L331.64,329.61 L329.59,329.57 L329.22,330.68 L329.29,331.81 L329.39,332.93 L329.53,334.05 L329.70,335.17 L329.91,336.28 L330.15,337.38 L330.42,338.48 L330.73,339.56 L331.07,340.65 L331.44,341.72 L331.85,342.79 L332.29,343.85 L332.76,344.91 L333.26,345.95 L333.79,346.99 L334.35,348.02 L334.95,349.05 L335.57,350.07 L336.23,351.08 L336.91,352.08 L337.62,353.07 L338.34,354.08 L339.09,355.09 L339.87,356.08 L340.68,357.07 L341.52,358.05 L342.39,359.03 L343.29,359.99 L344.23,360.95 L345.19,361.90 L346.19,362.84 L347.21,363.77 L348.27,364.69 L349.36,365.60 L350.47,366.50 Z" fill="currentColor"/><path d="M640.02,331.13 L640.11,332.34 L640.16,333.51 L640.18,334.68 L640.16,335.86 L640.12,337.04 L640.04,338.21 L639.93,339.39 L639.79,340.57 L639.61,341.75 L639.41,342.93 L639.17,344.12 L638.90,345.30 L638.60,346.48 L638.26,347.66 L637.89,348.84 L637.49,350.02 L637.06,351.20 L636.60,352.38 L636.10,353.56 L635.58,354.74 L635.02,355.91 L634.43,357.09 L633.80,358.26 L633.15,359.43 L632.46,360.59 L631.74,361.76 L630.99,362.92 L630.21,364.07 L629.40,365.22 L628.55,366.37 L627.68,367.52 L626.77,368.66 L625.83,369.79 L624.87,370.92 L623.87,372.05 L622.84,373.17 L621.78,374.28 L620.70,375.39 L619.58,376.49 L618.43,377.59 L617.26,378.67 L616.05,379.76 L614.82,380.83 L613.56,381.89 L612.27,382.95 L610.95,384.00 L609.61,385.04 L608.24,386.08 L606.84,387.10 L605.41,388.12 L603.96,389.12 L602.49,390.12 L600.98,391.10 L599.46,392.08 L597.90,393.04 L596.33,394.00 L594.73,394.94 L593.10,395.88 L591.45,396.80 L589.78,397.71 L588.08,398.61 L586.37,399.50 L584.63,400.38 L582.87,401.24 L581.08,402.09 L579.28,402.93 L577.46,403.76 L575.62,404.58 L573.75,405.38 L571.87,406.16 L569.97,406.94 L568.05,407.70 L566.11,408.45 L564.16,409.18 L562.19,409.90 L560.20,410.61 L558.19,411.30 L556.17,411.98 L554.14,412.64 L552.09,413.29 L550.02,413.92 L547.94,414.54 L545.85,415.14 L543.75,415.73 L541.63,416.30 L539.50,416.86 L537.36,417.40 L535.20,417.93 L533.04,418.44 L530.87,418.93 L528.69,419.41 L526.49,419.87 L524.29,420.32 L522.09,420.76 L519.87,421.19 L517.65,421.60 L515.42,422.00 L513.19,422.38 L510.95,422.75 L508.70,423.11 L506.45,423.45 L504.20,423.78 L501.94,424.10 L499.68,424.40 L497.42,424.68 L495.15,424.95 L492.88,425.21 L490.61,425.45 L488.34,425.67 L486.06,425.88 L483.79,426.07 L481.52,426.25 L479.25,426.41 L476.97,426.56 L474.70,426.69 L472.44,426.80 L470.17,426.90 L467.91,426.98 L465.65,427.04 L463.40,427.09 L461.14,427.12 L458.90,427.13 L456.66,427.13 L454.42,427.11 L452.20,427.07 L449.98,427.01 L447.76,426.94 L445.56,426.85 L443.36,426.74 L441.17,426.62 L438.99,426.48 L436.82,426.32 L434.66,426.14 L432.51,425.94 L430.38,425.73 L428.25,425.50 L426.14,425.25 L424.04,424.99 L421.95,424.70 L419.88,424.40 L417.82,424.08 L415.78,423.71 L413.76,423.32 L411.76,422.91 L409.77,422.49 L407.80,422.05 L405.84,421.60 L403.91,421.13 L401.99,420.64 L400.09,420.15 L398.21,419.63 L396.35,419.10 L394.51,418.56 L392.69,418.00 L390.89,417.43 L390.71,417.98 L392.52,418.55 L394.34,419.11 L396.19,419.66 L398.05,420.19 L399.94,420.70 L401.85,421.20 L403.77,421.69 L405.71,422.16 L407.67,422.61 L409.65,423.05 L411.64,423.47 L413.65,423.88 L415.68,424.27 L417.72,424.66 L419.77,425.06 L421.83,425.44 L423.91,425.81 L426.01,426.17 L428.11,426.51 L430.24,426.84 L432.37,427.15 L434.52,427.44 L436.68,427.72 L438.85,427.99 L441.03,428.24 L443.22,428.47 L445.43,428.69 L447.64,428.89 L449.86,429.07 L452.10,429.24 L454.34,429.39 L456.59,429.53 L458.84,429.64 L461.10,429.74 L463.37,429.82 L465.65,429.89 L467.93,429.93 L470.22,429.96 L472.51,429.97 L474.80,429.97 L477.10,429.94 L479.40,429.90 L481.71,429.83 L484.01,429.75 L486.32,429.65 L488.63,429.53 L490.94,429.40 L493.24,429.24 L495.55,429.06 L497.86,428.87 L500.16,428.66 L502.46,428.42 L504.76,428.17 L507.06,427.90 L509.35,427.61 L511.64,427.30 L513.92,426.97 L516.19,426.62 L518.46,426.25 L520.73,425.86 L522.98,425.45 L525.23,425.02 L527.47,424.57 L529.70,424.10 L531.91,423.61 L534.13,423.11 L536.33,422.59 L538.52,422.06 L540.69,421.51 L542.86,420.94 L545.02,420.36 L547.16,419.76 L549.29,419.14 L551.41,418.51 L553.51,417.87 L555.60,417.21 L557.68,416.53 L559.74,415.84 L561.78,415.14 L563.81,414.42 L565.82,413.68 L567.82,412.93 L569.80,412.17 L571.76,411.39 L573.70,410.60 L575.63,409.79 L577.53,408.98 L579.42,408.14 L581.29,407.30 L583.13,406.44 L584.96,405.56 L586.77,404.68 L588.55,403.78 L590.31,402.86 L592.05,401.94 L593.77,401.00 L595.47,400.05 L597.14,399.09 L598.79,398.12 L600.42,397.14 L602.02,396.14 L603.59,395.13 L605.15,394.11 L606.67,393.08 L608.17,392.04 L609.65,390.99 L611.10,389.93 L612.52,388.86 L613.92,387.78 L615.29,386.68 L616.63,385.58 L617.95,384.47 L619.23,383.35 L620.49,382.22 L621.72,381.08 L622.92,379.94 L624.09,378.78 L625.24,377.62 L626.35,376.45 L627.43,375.27 L628.49,374.08 L629.51,372.88 L630.50,371.68 L631.46,370.47 L632.39,369.25 L633.29,368.03 L634.16,366.80 L634.99,365.56 L635.80,364.32 L636.57,363.07 L637.31,361.82 L638.01,360.56 L638.69,359.30 L639.33,358.03 L639.93,356.75 L640.51,355.47 L641.05,354.19 L641.55,352.91 L642.02,351.62 L642.46,350.32 L642.86,349.03 L643.23,347.73 L643.56,346.43 L643.86,345.13 L644.13,343.82 L644.35,342.52 L644.55,341.21 L644.70,339.90 L644.83,338.60 L644.91,337.29 L644.96,335.98 L644.98,334.67 L644.96,333.37 L644.90,332.07 L644.81,330.80 Z" fill="currentColor"/><circle cx="500" cy="500" r="445" fill="none" stroke="currentColor" stroke-width="3"/><circle cx="500" cy="500" r="430" fill="none" stroke="currentColor" stroke-width="1"/><circle cx="500" cy="500" r="335" fill="none" stroke="currentColor" stroke-width="1"/><path d="M310.91 172.32 310.88 170.75 325.71 162.72 326.76 163.74ZM346.46 170.62Q346.71 170.49 346.88 170.82Q347.06 171.15 346.82 171.28Q345.24 172.13 343.50 172.93Q341.76 173.73 340.21 174.57Q338.45 175.53 337.22 176.33Q335.99 177.14 334.42 177.99Q334.20 178.11 334.03 177.78Q333.85 177.45 334.07 177.33Q336.75 175.88 336.88 174.70Q337.02 173.53 334.50 171.71L309.53 153.66L309.88 150.08L312.57 180.54Q312.95 184.61 315.09 185.53Q317.22 186.45 320.64 184.60Q320.91 184.46 321.09 184.78Q321.26 185.11 320.99 185.26Q319.36 186.14 317.93 186.77Q316.51 187.40 314.44 188.52Q312.43 189.61 311.27 190.38Q310.11 191.15 308.38 192.09Q308.16 192.21 307.98 191.88Q307.80 191.55 308.02 191.43Q309.49 190.64 310.26 189.47Q311.02 188.31 311.20 186.23Q311.37 184.16 311.06 180.69L308.15 147.63Q308.15 147.42 308.47 147.23Q308.80 147.04 308.95 147.20L336.66 167.12Q339.38 169.08 341.16 170.05Q342.94 171.03 344.18 171.11Q345.41 171.19 346.46 170.62Z M371.35 121.67Q367.68 122.85 366.28 125.55Q364.88 128.26 365.28 133.05Q365.30 133.21 364.97 133.30Q364.64 133.39 364.59 133.25Q364.47 132.45 364.15 130.98Q363.83 129.51 363.43 127.81Q363.03 126.11 362.63 124.54Q362.22 122.97 361.90 121.98Q361.81 121.68 362.15 121.57Q362.49 121.46 362.59 121.76Q362.77 122.35 363.45 122.43Q364.12 122.50 364.91 122.35Q365.71 122.19 366.24 122.02Q371.37 120.58 378.16 118.41Q382.33 117.08 384.77 116.20Q387.20 115.32 389.51 114.59Q391.53 113.94 392.54 113.33Q393.55 112.71 393.54 111.67Q393.53 111.42 393.84 111.32Q394.14 111.22 394.22 111.46Q394.43 112.40 394.82 114.00Q395.22 115.60 395.70 117.36Q396.18 119.11 396.59 120.60Q397.00 122.08 397.23 122.82Q397.28 122.96 396.95 123.07Q396.63 123.17 396.55 123.04Q394.68 118.56 392.11 117.21Q389.53 115.86 385.72 117.08Q383.66 117.74 382.70 118.33Q381.74 118.92 381.66 119.82Q381.57 120.71 382.10 122.36L390.80 149.58Q391.34 151.30 392.01 152.06Q392.68 152.82 393.94 152.75Q395.20 152.67 397.58 151.91Q397.73 151.86 397.84 152.21Q397.96 152.57 397.81 152.62Q396.22 153.12 394.22 153.70Q392.21 154.27 389.86 155.02Q387.63 155.74 385.66 156.43Q383.70 157.12 382.05 157.65Q381.90 157.70 381.79 157.34Q381.68 156.99 381.82 156.94Q384.15 156.20 385.25 155.52Q386.35 154.85 386.48 153.83Q386.61 152.81 386.07 151.10L377.33 123.75Q376.81 122.13 376.21 121.47Q375.61 120.81 374.49 120.92Q373.38 121.02 371.35 121.67Z M462.94 139.69 436.77 143.28Q436.62 143.30 436.57 142.93Q436.52 142.56 436.67 142.54Q438.81 142.25 439.82 141.80Q440.84 141.34 441.07 140.37Q441.30 139.40 441.06 137.62L437.15 109.18Q436.91 107.40 436.43 106.56Q435.95 105.72 434.85 105.52Q433.74 105.33 431.60 105.62Q431.45 105.65 431.40 105.28Q431.35 104.91 431.50 104.89L456.60 101.44Q457.18 101.36 457.26 101.92L458.45 109.67Q458.47 109.82 458.15 109.89Q457.83 109.97 457.75 109.79Q456.84 106.46 454.64 104.97Q452.43 103.49 449.23 103.93L446.07 104.36Q444.27 104.61 443.33 105.06Q442.39 105.52 442.12 106.39Q441.84 107.27 442.05 108.75L445.88 136.71Q446.08 138.18 446.55 138.96Q447.03 139.75 447.97 139.96Q448.92 140.17 450.61 139.94L454.63 139.38Q458.14 138.90 460.14 136.52Q462.13 134.14 462.46 130.25Q462.46 130.06 462.82 130.07Q463.19 130.08 463.21 130.24Q463.19 131.95 463.34 134.30Q463.50 136.65 463.77 138.64Q463.89 139.56 462.94 139.69ZM457.56 126.06Q457.20 123.40 455.53 122.35Q453.86 121.30 450.58 121.75L441.64 122.97L441.45 121.56L450.51 120.32Q453.70 119.88 455.00 118.59Q456.30 117.30 455.99 115.05Q455.97 114.90 456.33 114.85Q456.68 114.80 456.70 114.95Q456.96 116.84 457.07 117.90Q457.19 118.96 457.35 120.12Q457.54 121.55 457.81 122.93Q458.08 124.31 458.30 125.96Q458.32 126.08 457.95 126.13Q457.58 126.18 457.56 126.06Z M506.44 104.35 505.65 132.74Q505.60 134.38 505.91 135.21Q506.22 136.03 507.19 136.34Q508.16 136.65 510.06 136.71L515.37 136.85Q519.35 136.97 521.96 134.67Q524.57 132.38 525.48 128.51Q525.52 128.32 525.84 128.38Q526.17 128.43 526.16 128.62Q525.93 130.42 525.67 132.95Q525.41 135.48 525.35 137.63Q525.33 138.56 524.39 138.54L495.55 137.73Q495.43 137.73 495.44 137.35Q495.45 136.98 495.57 136.98Q497.73 137.05 498.81 136.77Q499.90 136.49 500.29 135.57Q500.69 134.65 500.74 132.85L501.54 104.16Q501.59 102.36 501.25 101.45Q500.90 100.54 499.84 100.17Q498.77 99.80 496.62 99.74Q496.49 99.73 496.50 99.36Q496.52 98.99 496.64 98.99Q498.13 99.04 500.06 99.18Q501.99 99.33 504.09 99.39Q506.31 99.45 508.22 99.41Q510.12 99.37 511.60 99.41Q511.75 99.42 511.74 99.79Q511.73 100.16 511.58 100.16Q509.44 100.10 508.36 100.41Q507.28 100.72 506.88 101.64Q506.49 102.56 506.44 104.35Z M566.21 138.99Q565.90 140.76 566.08 141.73Q566.26 142.71 567.27 143.20Q568.28 143.70 570.41 144.07Q570.56 144.10 570.49 144.46Q570.43 144.83 570.28 144.80Q568.75 144.53 566.92 144.15Q565.08 143.76 562.86 143.37Q560.75 143.00 558.85 142.73Q556.96 142.45 555.42 142.18Q555.27 142.16 555.33 141.79Q555.40 141.42 555.56 141.45Q557.67 141.82 558.81 141.71Q559.95 141.60 560.48 140.75Q561.01 139.90 561.32 138.12L566.31 109.86Q566.62 108.08 566.41 107.14Q566.21 106.19 565.18 105.66Q564.15 105.13 562.02 104.76Q561.87 104.73 561.93 104.36Q562.00 104.00 562.15 104.02Q563.69 104.29 565.56 104.72Q567.43 105.14 569.53 105.51Q571.76 105.91 573.65 106.15Q575.55 106.39 577.01 106.64Q577.16 106.67 577.10 107.04Q577.03 107.40 576.88 107.38Q574.77 107.00 573.65 107.18Q572.54 107.36 572.01 108.22Q571.49 109.07 571.18 110.84Z M626.06 160.43 601.00 152.08Q600.86 152.04 600.98 151.68Q601.09 151.33 601.24 151.38Q603.29 152.06 604.40 152.10Q605.51 152.15 606.14 151.38Q606.78 150.61 607.35 148.91L616.42 121.67Q616.99 119.97 616.93 119.00Q616.87 118.03 615.97 117.37Q615.07 116.71 613.02 116.03Q612.87 115.98 612.99 115.63Q613.11 115.27 613.25 115.32L637.29 123.33Q637.84 123.52 637.67 124.04L635.31 131.52Q635.26 131.67 634.94 131.59Q634.62 131.51 634.62 131.32Q635.28 127.94 633.96 125.63Q632.64 123.32 629.58 122.30L626.55 121.29Q624.83 120.71 623.78 120.71Q622.74 120.70 622.10 121.36Q621.47 122.03 621.00 123.44L612.08 150.22Q611.61 151.63 611.69 152.54Q611.76 153.45 612.52 154.06Q613.28 154.67 614.90 155.21L618.75 156.49Q622.11 157.61 624.95 156.36Q627.79 155.11 629.80 151.76Q629.89 151.59 630.21 151.76Q630.53 151.93 630.48 152.08Q629.71 153.61 628.81 155.78Q627.91 157.95 627.27 159.86Q626.98 160.74 626.06 160.43ZM627.27 145.83Q628.12 143.29 627.08 141.61Q626.05 139.93 622.91 138.88L614.35 136.03L614.80 134.67L623.48 137.56Q626.53 138.58 628.27 138.00Q630.01 137.42 630.73 135.26Q630.77 135.12 631.11 135.23Q631.45 135.35 631.40 135.49Q630.80 137.30 630.44 138.30Q630.07 139.30 629.70 140.41Q629.24 141.78 628.87 143.14Q628.50 144.49 627.97 146.07Q627.94 146.18 627.58 146.07Q627.23 145.95 627.27 145.83Z M684.23 188.12Q683.35 187.64 682.50 184.48Q681.65 181.31 680.97 175.87Q680.30 170.44 679.75 163.15L684.06 164.02Q685.02 173.08 686.06 178.74Q687.10 184.41 688.63 187.45Q690.15 190.50 692.42 191.73Q692.56 191.81 692.38 192.13Q692.21 192.46 692.07 192.39Q689.00 190.72 687.07 189.67Q685.14 188.62 684.23 188.12ZM689.75 146.80Q694.31 149.28 695.69 152.53Q697.07 155.78 695.30 159.02Q693.65 162.05 690.61 163.51Q687.56 164.97 684.02 164.80Q680.47 164.64 677.22 162.87Q676.61 162.53 675.91 162.12Q675.21 161.70 674.65 161.32L667.98 173.56Q667.12 175.14 666.98 176.13Q666.84 177.11 667.64 177.90Q668.45 178.69 670.34 179.72Q670.48 179.80 670.30 180.12Q670.13 180.45 669.99 180.37Q668.63 179.64 667.02 178.69Q665.42 177.74 663.44 176.67Q661.60 175.67 659.87 174.80Q658.15 173.93 656.79 173.19Q656.66 173.12 656.83 172.79Q657.01 172.47 657.15 172.54Q659.04 173.57 660.14 173.82Q661.24 174.06 662.03 173.43Q662.82 172.80 663.68 171.22L677.40 146.01Q678.26 144.43 678.37 143.47Q678.48 142.50 677.71 141.70Q676.94 140.89 675.04 139.85Q674.90 139.78 675.08 139.45Q675.26 139.12 675.39 139.20Q676.72 139.92 678.34 140.91Q679.97 141.90 681.81 142.90Q683.55 143.85 685.83 144.88Q688.12 145.91 689.75 146.80ZM689.89 158.33Q691.55 155.26 691.67 153.10Q691.79 150.94 690.69 149.41Q689.59 147.88 687.55 146.77Q685.49 145.65 684.18 145.92Q682.88 146.19 681.64 148.46L675.39 159.94Q676.11 160.44 676.97 160.97Q677.83 161.51 678.51 161.88Q682.53 164.07 685.18 163.08Q687.83 162.10 689.89 158.33Z" fill="currentColor"/><path d="M250.27 775.31 245.55 780.35 244.79 779.62Q246.66 777.32 246.62 775.37Q246.58 773.43 244.31 771.17L240.16 767.10L233.34 774.23L236.34 777.10Q237.42 778.13 238.48 777.96Q239.79 777.71 241.23 776.22L242.01 776.97L235.51 783.78L234.72 783.02Q236.11 781.57 236.29 780.20Q236.48 778.82 235.54 777.93L232.54 775.06L225.43 782.51L227.71 784.70L226.98 785.46L220.20 778.97L220.93 778.21L223.24 780.42L237.97 765.01L235.66 762.80L236.39 762.04Z M270.46 795.82Q270.53 800.17 267.14 804.36Q263.75 808.55 259.27 809.43Q254.80 810.32 251.40 807.57Q248.00 804.82 247.82 800.08Q247.70 795.35 251.08 791.29Q254.46 787.22 258.87 786.44Q263.29 785.66 266.87 788.55Q270.45 791.45 270.46 795.82ZM252.16 806.66Q254.62 808.64 257.79 807.32Q260.97 805.99 264.12 802.09Q267.27 798.19 267.96 795.07Q268.73 791.41 266.00 789.20Q263.26 786.99 260.00 788.42Q257.26 789.65 253.90 793.80Q246.93 802.42 252.16 806.66Z M302.29 814.71 301.70 815.58Q300.03 814.46 299.56 814.55Q298.38 814.78 297.37 816.28L291.79 824.57Q288.75 829.08 285.93 829.92Q283.10 830.77 278.99 827.99Q275.66 825.75 275.17 822.49Q274.68 819.23 276.41 816.66L284.81 804.20L282.21 802.45L282.80 801.58L290.56 806.80L289.97 807.68L287.32 805.89L279.00 818.24Q275.04 824.11 280.37 827.70Q285.84 831.38 290.25 824.84L296.44 815.65Q297.49 814.10 297.21 812.93Q297.10 812.48 295.49 811.40L296.08 810.53Z M312.80 845.77 311.64 834.50 309.83 833.49 304.99 842.31 307.75 843.85 307.24 844.77 298.98 840.17 299.50 839.25 302.26 840.79 312.63 822.17 309.87 820.63 310.38 819.71 319.38 824.72Q322.98 826.72 324.05 829.19Q325.13 831.66 323.81 834.04Q322.48 836.41 319.99 836.97Q317.64 837.41 314.93 836.13L316.42 847.78Q316.56 848.64 318.11 849.70L317.62 850.59Q315.50 849.30 310.76 846.77L311.32 845.84L312.15 846.30Q312.61 846.44 312.74 846.22Q312.86 846.00 312.80 845.77ZM312.89 834.06Q318.30 837.08 320.78 832.35Q323.06 827.97 318.51 825.44L315.37 823.69L310.31 832.63Z M349.59 864.30 349.16 865.27 339.98 861.14 340.41 860.18Q342.65 861.18 343.01 860.38Q343.22 859.91 343.14 859.24L341.92 847.96L335.87 850.72L333.09 856.89L335.98 858.18L335.55 859.15L326.96 855.28L327.39 854.32L330.27 855.62L339.01 836.18L336.13 834.88L336.56 833.92L345.21 837.81L344.78 838.77L341.90 837.47L336.74 848.95L349.24 843.46Q350.09 843.13 350.30 842.67Q350.51 842.20 350.41 841.71Q350.32 841.22 348.60 840.48L349.03 839.52L356.78 843.01L356.35 843.97Q354.33 843.06 353.31 843.23Q352.28 843.41 349.84 844.51L345.18 846.59L346.62 860.88Q346.61 860.99 346.64 861.26L346.67 861.69Q346.79 862.67 347.23 863.09Q347.45 863.34 349.59 864.30Z M382.54 876.21 382.19 877.21 373.84 874.32 374.18 873.32 376.75 874.21 376.76 867.13 369.01 864.45 366.79 866.92Q365.70 868.20 365.46 868.89Q365.23 869.58 365.32 869.93Q365.41 870.29 367.24 870.92L366.90 871.92L359.89 869.50L360.24 868.50Q361.90 869.11 362.81 868.91Q363.73 868.70 365.51 866.47L378.81 850.57L380.10 851.01L380.16 875.39ZM369.89 863.38 376.73 865.75 376.80 855.24Z M410.14 877.04Q409.15 880.85 405.56 882.07Q402.48 883.12 398.50 882.09Q396.09 881.46 393.42 879.57L394.82 874.35L395.80 874.61Q395.33 877.26 396.38 878.76Q396.86 879.45 397.99 880.13Q399.11 880.81 400.11 881.03Q402.38 881.59 404.40 880.85Q406.40 880.07 407.00 878.05Q407.55 875.91 406.39 874.24Q405.23 872.56 402.67 871.58Q395.88 868.90 397.18 863.90Q398.09 860.41 401.23 859.30Q403.91 858.31 407.17 859.16Q408.12 859.40 409.36 860.03Q410.61 860.65 410.99 860.75Q411.37 860.84 411.63 860.39L412.55 860.63L411.01 866.52L410.03 866.26Q410.43 863.76 409.48 862.36Q408.53 860.95 406.08 860.35Q401.26 859.16 400.22 863.43Q399.31 867.23 404.37 869.11Q411.50 871.81 410.14 877.04Z  M461.54 872.45Q463.90 876.10 463.24 881.45Q462.57 886.80 459.24 889.92Q455.91 893.03 451.57 892.50Q447.24 891.96 444.57 888.03Q441.98 884.08 442.69 878.84Q443.41 873.60 446.74 870.61Q450.08 867.61 454.65 868.18Q459.22 868.74 461.54 872.45ZM451.74 891.32Q454.88 891.70 456.87 888.90Q458.86 886.10 459.47 881.12Q460.09 876.14 459.02 873.14Q457.74 869.62 454.25 869.19Q450.76 868.76 448.75 871.69Q447.07 874.19 446.42 879.49Q445.06 890.49 451.74 891.32Z M489.14 893.04 483.02 883.51 480.94 883.42 480.61 893.48 483.77 893.61 483.73 894.66 474.29 894.29 474.33 893.23 477.49 893.36 478.33 872.06 475.17 871.93 475.22 870.88 485.51 871.29Q489.62 871.45 491.70 873.17Q493.77 874.88 493.66 877.60Q493.56 880.32 491.59 881.94Q489.69 883.40 486.69 883.48L493.28 893.20Q493.80 893.90 495.66 894.15L495.62 895.17Q493.14 894.97 487.77 894.86L487.85 893.77L488.80 893.81Q489.28 893.72 489.29 893.47Q489.30 893.21 489.14 893.04ZM483.94 882.56Q490.12 882.80 490.20 877.46Q490.26 872.53 485.06 872.32L481.46 872.18L480.98 882.44Z M525.85 870.82 526.21 877.71 525.19 877.75Q524.87 874.91 523.48 873.59Q522.10 872.26 518.77 872.23L517.20 872.23L518.08 893.53L521.28 893.40L521.32 894.45L511.88 894.84L511.83 893.79L514.99 893.66L514.11 872.36L512.58 872.49Q509.29 872.76 508.04 874.12Q506.79 875.49 506.61 878.52L505.62 878.56L505.40 871.66Z M561.29 889.31 561.43 890.36 552.05 891.56 551.92 890.51 555.09 890.11 553.74 879.52 543.38 880.84 544.73 891.43 547.87 891.03 548.00 892.07 538.70 893.26 538.56 892.21 541.73 891.81 539.03 870.66 535.86 871.07 535.73 870.02 545.04 868.83 545.17 869.88 542.04 870.28 543.23 879.66 553.59 878.33 552.39 868.96 549.22 869.36 549.09 868.32 558.46 867.12 558.59 868.17 555.46 868.57 558.16 889.71Z M587.07 864.17Q590.51 866.83 591.65 872.09Q592.80 877.36 590.69 881.40Q588.58 885.45 584.31 886.38Q580.04 887.31 576.22 884.49Q572.47 881.62 571.41 876.44Q570.35 871.26 572.50 867.32Q574.65 863.39 579.16 862.41Q583.66 861.43 587.07 864.17ZM584.07 885.21Q587.16 884.54 588.11 881.24Q589.06 877.93 587.99 873.03Q586.93 868.13 584.92 865.64Q582.55 862.75 579.11 863.50Q575.68 864.25 574.76 867.69Q574.00 870.60 575.13 875.82Q577.49 886.65 584.07 885.21Z M624.27 863.04Q625.69 867.58 623.71 871.80Q621.73 876.01 617.76 877.10Q611.79 878.75 606.67 880.49L606.36 879.48L609.41 878.53L603.07 858.18L600.02 859.13L599.70 858.12Q602.64 857.38 604.87 856.65Q607.10 855.92 610.91 854.77Q615.51 853.41 619.08 855.63Q622.66 857.84 624.27 863.04ZM621.42 871.37Q622.22 868.34 620.78 863.89Q619.34 859.44 617.36 857.43Q614.88 854.82 611.18 855.65Q608.21 856.40 606.00 857.41L612.30 877.63Q614.56 877.14 615.68 876.79Q616.80 876.44 617.50 876.15Q620.69 874.62 621.42 871.37Z M649.12 843.46Q652.96 845.48 655.01 850.47Q657.05 855.45 655.68 859.80Q654.30 864.15 650.26 865.81Q646.22 867.47 641.97 865.36Q637.77 863.18 635.82 858.27Q633.88 853.35 635.32 849.10Q636.75 844.86 641.01 843.11Q645.28 841.36 649.12 843.46ZM649.82 864.70Q652.75 863.50 653.11 860.08Q653.47 856.67 651.57 852.03Q649.66 847.39 647.26 845.29Q644.42 842.85 641.16 844.19Q637.91 845.52 637.60 849.07Q637.36 852.07 639.39 857.01Q643.60 867.26 649.82 864.70Z M680.58 824.94 681.06 825.88Q679.31 826.78 679.16 827.24Q678.78 828.43 679.58 829.97L688.80 847.71L688.10 848.07L665.16 834.96L673.23 850.61Q674.04 852.18 675.17 852.52Q675.63 852.66 677.38 851.76L677.87 852.70L671.19 856.14L670.71 855.20Q672.40 854.33 672.56 853.90Q673.03 852.74 672.21 851.14L664.14 835.49Q663.69 834.84 662.87 835.26L661.18 836.13L660.70 835.19L666.74 832.08L684.77 842.48L678.58 830.49Q677.79 828.95 676.52 828.57Q676.05 828.47 674.38 829.32L673.90 828.39Z M706.37 809.17 710.09 814.98 709.23 815.52Q707.54 813.21 705.68 812.75Q703.83 812.29 700.91 813.91L699.55 814.69L710.88 832.74L713.59 831.05L714.15 831.94L706.15 836.96L705.58 836.07L708.26 834.39L696.93 816.33L695.67 817.20Q692.95 819.07 692.54 820.88Q692.13 822.68 693.47 825.41L692.64 825.93L689.03 820.05Z M735.94 815.50 736.57 816.36 728.71 822.08 728.08 821.23 730.67 819.35 718.12 802.12 715.53 804.00 714.91 803.15 722.77 797.42 723.39 798.27 720.84 800.13 733.39 817.37Z M757.86 793.60 758.57 793.71Q758.80 796.80 757.83 798.81Q756.85 800.82 754.58 802.72Q751.24 805.51 746.60 804.73Q741.92 803.91 738.57 799.82Q735.22 795.73 735.37 791.24Q735.52 786.75 738.88 783.94Q741.02 782.15 742.15 781.54Q743.28 780.93 745.07 780.32L748.49 784.41L747.71 785.06Q745.61 782.92 743.70 782.76Q741.80 782.61 739.59 784.63Q734.73 789.09 741.75 797.49Q744.84 801.20 748.13 802.48Q751.45 803.70 753.68 801.90Q755.90 800.11 756.75 798.27Q757.61 796.43 757.86 793.60Z M775.10 773.04Q777.84 775.88 777.01 779.57Q776.30 782.75 773.35 785.61Q771.56 787.34 768.56 788.63L764.82 784.72L765.56 784.01Q767.57 785.80 769.40 785.69Q770.24 785.63 771.41 785.03Q772.57 784.42 773.28 783.69Q774.94 782.03 775.36 779.92Q775.74 777.81 774.32 776.25Q772.78 774.66 770.75 774.78Q768.72 774.91 766.55 776.58Q760.73 780.98 757.14 777.26Q754.63 774.67 755.31 771.41Q755.86 768.61 758.28 766.27Q758.99 765.58 760.17 764.84Q761.35 764.11 761.63 763.84Q761.91 763.56 761.65 763.10L762.34 762.44L766.57 766.82L765.83 767.52Q763.91 765.88 762.22 765.96Q760.52 766.04 758.74 767.81Q755.22 771.31 758.31 774.42Q761.08 777.18 765.32 773.84Q771.34 769.16 775.10 773.04Z" fill="currentColor"/><rect x="876.0" y="494.0" width="12" height="12" fill="var(--gold)" transform="rotate(45 882.0 500.0)"/><rect x="112.0" y="494.00" width="12" height="12" fill="var(--gold)" transform="rotate(45 118.0 500.00)"/></symbol></svg>
+
+<div class="bar"><div class="wrap">
+  <a class="mark" href="#top" aria-label="Atelier">
+    <svg viewBox="0 0 1000 1000" aria-hidden="true"><use href="#seal"/></svg>
+    <span data-en="Kifisia">Κηφισιά</span>
+  </a>
+  <div class="lang" role="group" aria-label="Γλώσσα / Language">
+    <button id="lang-el" aria-pressed="true">ΕΛ</button>
+    <button id="lang-en" aria-pressed="false">EN</button>
+  </div>
+</div></div>
+
+<main id="top">
+<!-- Prologue -->
+<section class="prologue" id="prologue" aria-labelledby="h-pro">
+  <div class="ghost" aria-hidden="true"></div>
+  <div class="lit" aria-hidden="true"><div class="glow"></div></div>
+  <div class="inner wrap">
+    <div class="small" data-en="Atelier · Fourkas Orthodontics · Kifisia">Atelier · Ορθοδοντική Φούρκα · Κηφισιά</div>
+    <h1 id="h-pro" data-en="Someone carved this smile <em>2,600 years ago</em>.">Κάποιος σκάλισε αυτό το χαμόγελο <em>πριν από 2.600 χρόνια</em>.</h1>
+    <p class="sub" data-en="Here you will find no prices, no offers and no photographs. Only a smile, a number and a door.">Εδώ δεν θα βρείτε τιμές, προσφορές ή φωτογραφίες. Μόνο ένα χαμόγελο, έναν αριθμό και μια πόρτα.</p>
+    <div class="hint"><i></i><span data-en="Move the light across the marble">Περάστε το φως πάνω από το μάρμαρο</span></div>
+  </div>
+  <a class="down" href="#act1" data-en="Α΄ · scroll">Α΄ · συνεχίστε</a>
+</section>
+
+<!-- Act I -->
+<section class="smile" id="act1" aria-labelledby="h-a1">
+  <div class="stage wrap">
+    <div class="arcbox" id="arcbox" aria-hidden="true">
+      <svg viewBox="0 0 1618 1000" preserveAspectRatio="none"><path class="wire" id="wire" pathLength="1" d="M120 430 C 520 760, 1098 760, 1498 430"/></svg>
+    </div>
+    <div class="text">
+      <div class="act" data-en="ACT I · THE SMILE">Α΄ · ΤΟ ΜΕΙΔΙΑΜΑ</div>
+      <h2 id="h-a1" data-en="Every element finds its place, until the whole is at rest.">Κάθε στοιχείο βρίσκει τη θέση του, ώσπου το σύνολο να ησυχάσει.</h2>
+      <p data-en="On the statues of the 6th century BC the lips turn slightly upward. Art historians call it the archaic smile. The same smile appears on the bronzes of ancient Laconia.">Στα αγάλματα του 6ου αιώνα π.Χ. τα χείλη ανασηκώνονται ελαφρά. Οι ιστορικοί της τέχνης το ονομάζουν αρχαϊκό μειδίαμα. Το ίδιο χαμόγελο εμφανίζεται στα χάλκινα της αρχαίας Λακωνίας.</p>
+      <p data-en="Orthodontics does something similar, slowly: it brings each tooth to its place along a single line.">Η ορθοδοντική κάνει κάτι παρόμοιο, αργά: φέρνει κάθε δόντι στη θέση του, πάνω σε μία γραμμή.</p>
+      <div class="meter"><b id="meter"></b><span id="meter-n">0%</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- Act II -->
+<section class="phi" id="act2" aria-labelledby="h-a2"><div class="wrap grid">
+  <div class="big" aria-hidden="true">Φ
+    <svg viewBox="0 0 1618 1000" id="spiral">
+      <g class="rects"><rect x="0" y="0" width="1618" height="1000"/><line x1="1000" y1="0" x2="1000" y2="1000"/><line x1="1000" y1="618" x2="1618" y2="618"/><line x1="1236" y1="618" x2="1236" y2="1000"/><line x1="1000" y1="764" x2="1236" y2="764"/></g>
+      <path class="spiral" pathLength="1" d="M0 1000 A1000 1000 0 0 1 1000 0 A618 618 0 0 1 1618 618 A382 382 0 0 1 1236 1000 A236 236 0 0 1 1000 764 A146 146 0 0 1 1146 618 A90 90 0 0 1 1236 708"/>
+    </svg>
+  </div>
+  <div class="text">
+    <div class="act" data-en="ACT II · Φ">Β΄ · Φ</div>
+    <h2 id="h-a2" data-en="Our mark is not a letter. It is a ratio.">Το σήμα μας δεν είναι γράμμα. Είναι αναλογία.</h2>
+    <div class="digits" id="digits" aria-label="1,6180339887">1,6180339887</div>
+    <p data-en="Greek geometers called it the “extreme and mean ratio”. Euclid defined it in the Elements. Inside our seal, a tooth and its archwire form the same Φ.">Οι Έλληνες γεωμέτρες το ονόμασαν «άκρο και μέσο λόγο». Ο Ευκλείδης τον όρισε στα Στοιχεία. Μέσα στη σφραγίδα μας, ένα δόντι και το σύρμα του σχηματίζουν το ίδιο Φ.</p>
+    <p data-en="A face does not obey a magic number. It obeys itself. Our work is to find the proportion that belongs to each face.">Ένα πρόσωπο δεν υπακούει σε κανέναν μαγικό αριθμό. Υπακούει στον εαυτό του. Η δουλειά μας είναι να βρούμε την αναλογία που ανήκει στο κάθε πρόσωπο.</p>
+    <p class="aside" data-en="A detail for the curious: every two-column section of this page is divided 1.618 to 1.">Μια λεπτομέρεια για τους περίεργους: κάθε δίστηλη ενότητα αυτής της σελίδας είναι χωρισμένη σε λόγο 1,618 προς 1.</p>
+  </div>
+</div></section>
+
+<!-- Act III -->
+<section class="five" id="act3" aria-labelledby="h-a3"><div class="wrap grid">
+  <div>
+    <div class="numeral" aria-hidden="true">Ε<sup>΄</sup></div>
+    <div class="seals" aria-hidden="true">
+      <svg viewBox="0 0 1000 1000"><use href="#seal"/></svg><svg viewBox="0 0 1000 1000"><use href="#seal"/></svg><svg viewBox="0 0 1000 1000"><use href="#seal"/></svg><svg viewBox="0 0 1000 1000"><use href="#seal"/></svg><svg viewBox="0 0 1000 1000"><use href="#seal"/></svg>
+    </div>
+  </div>
+  <div>
+    <div class="act" data-en="ACT III · FIVE" style="margin-bottom:18px">Γ΄ · ΠΕΝΤΕ</div>
+    <h2 id="h-a3" data-en="Five new treatments begin at the Atelier each month.">Πέντε νέες θεραπείες ξεκινούν κάθε μήνα στο Atelier.</h2>
+    <p class="lead" data-en="The number comes from time. Five is what fits when every visit is given the hour it needs. When the month is full, the next request waits for the next month.">Ο αριθμός βγαίνει από τον χρόνο. Πέντε είναι όσες χωράνε, όταν κάθε επίσκεψη έχει την ώρα που χρειάζεται. Όταν ο μήνας γεμίσει, το επόμενο αίτημα περιμένει τον επόμενο μήνα.</p>
+    <div class="vows">
+      <div><h3 data-en="Quiet">Ησυχία</h3><p data-en="Appointments are spaced so that the waiting room is almost always empty.">Τα ραντεβού απέχουν μεταξύ τους, ώστε η αίθουσα αναμονής να είναι σχεδόν πάντα άδεια.</p></div>
+      <div><h3 data-en="Discretion">Διακριτικότητα</h3><p data-en="No photographs, names or cases of patients are ever published.">Δεν δημοσιεύονται ποτέ φωτογραφίες, ονόματα ή περιπτώσεις ασθενών.</p></div>
+      <div><h3 data-en="By hand">Με το χέρι</h3><p data-en="The orthodontist plans and follows every treatment personally.">Ο ορθοδοντικός σχεδιάζει και παρακολουθεί προσωπικά κάθε θεραπεία.</p></div>
+    </div>
+  </div>
+</div></section>
+
+<!-- Act IV -->
+<section class="cat" id="act4" aria-labelledby="h-a4"><div class="wrap">
+  <div class="head">
+    <div style="display:flex;flex-direction:column;gap:18px">
+      <div class="act" data-en="ACT IV · THE CATALOGUE">Δ΄ · Ο ΚΑΤΑΛΟΓΟΣ</div>
+      <h2 id="h-a4" data-en="The materials of the Atelier.">Τα υλικά του Atelier.</h2>
+    </div>
+    <p data-en="Recorded the way a museum records its objects: by material, by visibility, by time.">Καταγραμμένα όπως ένα μουσείο καταγράφει τα εκθέματά του: με το υλικό, την ορατότητα και τον χρόνο.</p>
+  </div>
+  <div class="cards">
+    <article class="card"><span class="no">Α</span><h3 data-en="Clear aligners">Διαφανείς νάρθηκες</h3>
+      <dl><dt data-en="Material">Υλικό</dt><dd data-en="Clear thermoplastic, made for you from a digital plan">Διάφανο θερμοπλαστικό, κατασκευασμένο για εσάς από ψηφιακό σχέδιο</dd>
+      <dt data-en="Visibility">Ορατότητα</dt><dd data-en="Almost none">Σχεδόν καμία</dd>
+      <dt data-en="Suited to">Για</dt><dd data-en="Adults and adolescents">Ενήλικες και εφήβους</dd></dl></article>
+    <article class="card"><span class="no">Β</span><h3 data-en="Ceramic brackets">Κεραμικά brackets</h3>
+      <dl><dt data-en="Material">Υλικό</dt><dd data-en="Ceramic in the colour of the tooth">Κεραμικό στο χρώμα του δοντιού</dd>
+      <dt data-en="System">Σύστημα</dt><dd>Damon Ultima</dd>
+      <dt data-en="Suited to">Για</dt><dd data-en="Adults and adolescents">Ενήλικες και εφήβους</dd></dl></article>
+    <article class="card"><span class="no">Γ</span><h3 data-en="Metal brackets">Μεταλλικά brackets</h3>
+      <dl><dt data-en="Material">Υλικό</dt><dd data-en="Metal, for precise control of each movement">Μέταλλο, για ακριβή έλεγχο κάθε κίνησης</dd>
+      <dt data-en="System">Σύστημα</dt><dd>Damon Ultima</dd>
+      <dt data-en="Suited to">Για</dt><dd data-en="Children, adolescents, adults">Παιδιά, εφήβους, ενήλικες</dd></dl></article>
+    <article class="card"><span class="no">Δ</span><h3 data-en="Early treatment">Πρώιμη θεραπεία</h3>
+      <dl><dt data-en="Material">Υλικό</dt><dd data-en="Growth itself, guided at the right stage">Η ίδια η ανάπτυξη, καθοδηγημένη στο σωστό στάδιο</dd>
+      <dt data-en="Concerns">Αφορά</dt><dd data-en="Bite, space and skeletal discrepancies">Σύγκλειση, χώρο και σκελετικές αποκλίσεις</dd>
+      <dt data-en="Suited to">Για</dt><dd data-en="Children">Παιδιά</dd></dl></article>
+  </div>
+</div></section>
+
+<!-- Act V -->
+<section class="inv" id="act5" aria-labelledby="h-a5"><div class="wrap grid">
+  <div>
+    <div class="act" data-en="ACT V · THE DOOR">Ε΄ · Η ΠΟΡΤΑ</div>
+    <h2 id="h-a5" data-en="The Atelier opens in two ways.">Το Atelier ανοίγει με δύο τρόπους.</h2>
+    <p class="lead" data-en="With an invitation card from someone who has been here, or with a request. The first meeting is a conversation.">Με μια κάρτα πρόσκλησης από κάποιον που έχει περάσει από εδώ, ή με ένα αίτημα. Η πρώτη συνάντηση είναι μια συζήτηση.</p>
+  </div>
+  <div>
+    <div class="doors" role="group" aria-label="Τρόπος">
+      <button class="door" id="door-card" aria-pressed="true"><b data-en="I hold an invitation card">Έχω κάρτα πρόσκλησης</b><span data-en="Introduction within 7 days, outside the waiting list.">Γνωριμία εντός 7 ημερών, εκτός λίστας αναμονής.</span></button>
+      <button class="door" id="door-req" aria-pressed="false"><b data-en="I would like to request a meeting">Θα ήθελα να ζητήσω γνωριμία</b><span data-en="If this month's five places are taken, you join the waiting list.">Αν οι πέντε θέσεις του μήνα έχουν δοθεί, μπαίνετε στη λίστα αναμονής.</span></button>
+    </div>
+    <form id="req-form" novalidate>
+      <div class="f full cardno" id="cardno-wrap"><label for="r-card" data-en="Card number">Αριθμός κάρτας</label><input id="r-card" name="card" inputmode="numeric" maxlength="4" placeholder="0000" autocomplete="off"></div>
+      <div class="f"><label for="r-name" data-en="Full name">Ονοματεπώνυμο</label><input id="r-name" name="name" autocomplete="name" required></div>
+      <div class="f"><label for="r-phone" data-en="Phone">Τηλέφωνο</label><input id="r-phone" name="phone" type="tel" autocomplete="tel" required></div>
+      <div class="f"><label for="r-email">Email</label><input id="r-email" name="email" type="email" autocomplete="email"></div>
+      <div class="f"><label for="r-for" data-en="The meeting is for">Η γνωριμία αφορά</label>
+        <select id="r-for" name="for"><option data-en="Myself">Εμένα</option><option data-en="My child">Το παιδί μου</option><option data-en="Someone else">Άλλο πρόσωπο</option></select></div>
+      <div class="f full"><label for="r-msg" data-en="Anything you would like us to know (optional)">Κάτι που θα θέλατε να γνωρίζουμε (προαιρετικό)</label><textarea id="r-msg" name="msg"></textarea></div>
+      <label class="consent" for="r-consent"><input id="r-consent" name="consent" value="ναι" type="checkbox" required> <span data-en="I agree that the practice may use my details only to contact me about this request.">Συμφωνώ να χρησιμοποιηθούν τα στοιχεία μου μόνο για την επικοινωνία σχετικά με αυτό το αίτημα.</span></label>
+      <div><button class="send" type="submit" data-en="Send">Αποστολή</button></div>
+      <div class="status" id="req-done" role="status" hidden></div>
+    </form>
+  </div>
+</div></section>
+</main>
+
+<footer><div class="wrap">
+  <div class="grid">
+    <svg viewBox="0 0 1000 1000" aria-hidden="true"><use href="#seal"/></svg>
+    <div><h4 data-en="Atelier · Kifisia">Atelier · Κηφισιά</h4><span data-en="6 Kyriazi St, 145 62 Kifisia">Κυριαζή 6, 145 62 Κηφισιά</span></div>
+    <div><h4 data-en="Contact">Επικοινωνία</h4>210 623 3398<br>fourkas@outlook.com</div>
+    <div><h4 data-en="Visits">Επισκέψεις</h4><span data-en="By appointment only">Μόνο κατόπιν ραντεβού</span></div>
+  </div>
+  <div class="legal">
+    <span data-en="Information about the practice and its treatments, in line with the Code of Dental Ethics (P.D. 39/2009). No testimonials, prices or offers.">Ενημέρωση για το ιατρείο και τις θεραπείες του, σύμφωνα με τον Κώδικα Οδοντιατρικής Δεοντολογίας (ΠΔ 39/2009). Χωρίς μαρτυρίες, τιμές ή προσφορές.</span>
+    <span>© 2026 Atelier <span data-en="Fourkas Orthodontics">Ορθοδοντικής Φούρκα</span></span>
+  </div>
+</div></footer>
+
+<script>
+(function(){
+  document.documentElement.lang='el';
+  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---------- language ---------- */
+  var nodes=[].slice.call(document.querySelectorAll('[data-en]'));
+  nodes.forEach(function(n){n.setAttribute('data-el',n.innerHTML)});
+  var done=document.getElementById('req-done');
+  var msgs={
+    el:{ok:'Ευχαριστούμε. Λάβαμε το αίτημά σας και θα σας καλέσουμε σύντομα.',err:'Συμπληρώστε ονοματεπώνυμο και τηλέφωνο, και αποδεχτείτε τη χρήση των στοιχείων.',card:'Ο αριθμός της κάρτας έχει τέσσερα ψηφία.',fail:'Το αίτημα δεν στάλθηκε. Καλέστε μας στο 210 623 3398 ή γράψτε στο fourkas@outlook.com.',fallback:'Για γνωριμία καλέστε στο 210 623 3398 ή γράψτε στο fourkas@outlook.com.'},
+    en:{ok:'Thank you. We have your request and will call you shortly.',err:'Please fill in your name and phone, and agree to the use of your details.',card:'The card number has four digits.',fail:'The request was not sent. Please call +30 210 623 3398 or write to fourkas@outlook.com.',fallback:'For an introduction please call +30 210 623 3398 or write to fourkas@outlook.com.'}
+  };
+  var lang='el';
+  var CARVE={el:['ΜΕΤΡΟΝ ΑΡΙΣΤΟΝ','ΜΗΔΕΝ ΑΓΑΝ','Φ = 1,6180339887','ΠΕΝΤΕ ΤΟΝ ΜΗΝΑ','ΚΗΦΙΣΙΑ','Η ΠΟΡΤΑ ΕΙΝΑΙ ΣΤΟ ΤΕΛΟΣ'],
+             en:['ΜΕΤΡΟΝ ΑΡΙΣΤΟΝ','ΜΗΔΕΝ ΑΓΑΝ','Φ = 1.6180339887','FIVE EACH MONTH','KIFISIA','THE DOOR IS AT THE END']};
+  var WORD={el:'ΜΕΙΔΙΑΜΑ',en:'ΜΕΙΔΙΑΜΑ'};
+  function set(l){
+    lang=l;document.documentElement.lang=l;
+    nodes.forEach(function(n){n.innerHTML=n.getAttribute(l==='en'?'data-en':'data-el')});
+    document.getElementById('lang-el').setAttribute('aria-pressed',l==='el');
+    document.getElementById('lang-en').setAttribute('aria-pressed',l==='en');
+    document.title=l==='en'?'Atelier · Fourkas Orthodontics':'Atelier Ορθοδοντικής Φούρκα';
+    done.hidden=true;buildCarvings();
+    try{localStorage.setItem('atelier-lang',l)}catch(e){}
+  }
+  document.getElementById('lang-el').onclick=function(){set('el')};
+  document.getElementById('lang-en').onclick=function(){set('en')};
+
+  /* ---------- prologue: carvings and lamp ---------- */
+  var pro=document.getElementById('prologue'),lit=pro.querySelector('.lit'),ghost=pro.querySelector('.ghost');
+  var SPOTS=[[8,18,22,-4],[58,12,16,3],[66,74,20,-2],[6,70,15,2],[38,88,13,0],[72,40,12,-6]];
+  function buildCarvings(){
+    [lit,ghost].forEach(function(layer){
+      [].slice.call(layer.querySelectorAll('.carve')).forEach(function(c){c.remove()});
+      CARVE[lang].forEach(function(t,i){
+        var s=SPOTS[i],d=document.createElement('div');d.className='carve';d.textContent=t;
+        d.style.left=s[0]+'%';d.style.top=s[1]+'%';d.style.fontSize='clamp(12px,'+(s[2]/10)+'vw,'+(s[2]*1.6)+'px)';d.style.transform='rotate('+s[3]+'deg)';
+        layer.appendChild(d);
+      });
+    });
+  }
+  var lx=50,ly=42,tx=50,ty=42,manual=0,t0=performance.now();
+  function lampTo(e){var r=pro.getBoundingClientRect();var p=e.touches?e.touches[0]:e;tx=(p.clientX-r.left)/r.width*100;ty=(p.clientY-r.top)/r.height*100;manual=performance.now()}
+  pro.addEventListener('pointermove',lampTo);pro.addEventListener('touchmove',lampTo,{passive:true});
+  function lampLoop(now){
+    if(now-manual>2500){var k=(now-t0)/1000;tx=50+34*Math.sin(k*.23);ty=46+30*Math.sin(k*.37+1)}
+    lx+=(tx-lx)*.08;ly+=(ty-ly)*.08;
+    pro.style.setProperty('--lx',lx+'%');pro.style.setProperty('--ly',ly+'%');
+    lit.style.setProperty('--lx',lx+'%');lit.style.setProperty('--ly',ly+'%');
+    requestAnimationFrame(lampLoop);
+  }
+  if(!reduce)requestAnimationFrame(lampLoop);else{lit.style.webkitMaskImage='none';lit.style.maskImage='none';lit.style.opacity=.45}
+
+  /* ---------- Act I: letters align along the arc ---------- */
+  var box=document.getElementById('arcbox'),wire=document.getElementById('wire'),sec=document.getElementById('act1');
+  var meter=document.getElementById('meter'),meterN=document.getElementById('meter-n');
+  var word=WORD.el,letters=[],scatter=[];
+  function rnd(i,s){var x=Math.sin(i*12.9898+s*78.233)*43758.5453;return x-Math.floor(x)}
+  word.split('').forEach(function(ch,i){
+    var el=document.createElement('span');el.className='ltr';el.textContent=ch;box.appendChild(el);letters.push(el);
+    scatter.push({dx:(rnd(i,1)-.5)*0.55,dy:(rnd(i,2)-.5)*0.7,rot:(rnd(i,3)-.5)*70});
+  });
+  function bez(t){ // same curve as the wire, in 1618x1000 units
+    var p0=[120,430],p1=[520,760],p2=[1098,760],p3=[1498,430],u=1-t;
+    var x=u*u*u*p0[0]+3*u*u*t*p1[0]+3*u*t*t*p2[0]+t*t*t*p3[0];
+    var y=u*u*u*p0[1]+3*u*u*t*p1[1]+3*u*t*t*p2[1]+t*t*t*p3[1];
+    var dx=3*u*u*(p1[0]-p0[0])+6*u*t*(p2[0]-p1[0])+3*t*t*(p3[0]-p2[0]);
+    var dy=3*u*u*(p1[1]-p0[1])+6*u*t*(p2[1]-p1[1])+3*t*t*(p3[1]-p2[1]);
+    return [x,y,Math.atan2(dy,dx)*180/Math.PI];
+  }
+  function ease(x){return x<.5?4*x*x*x:1-Math.pow(-2*x+2,3)/2}
+  function layout(p){
+    var W=box.clientWidth,H=box.clientHeight,n=letters.length,e=ease(p);
+    letters.forEach(function(el,i){
+      var t=.1+.8*(i/(n-1)),b=bez(t);
+      var fx=b[0]/1618*W,fy=b[1]/1000*H-el.offsetHeight*.95;
+      var sx=fx+scatter[i].dx*W,sy=fy+scatter[i].dy*H;
+      var x=sx+(fx-sx)*e,y=sy+(fy-sy)*e,r=scatter[i].rot+(b[2]-scatter[i].rot)*e;
+      el.style.transform='translate('+(x-el.offsetWidth/2)+'px,'+y+'px) rotate('+r+'deg)';
+      el.style.color=e>.98?'var(--bone)':'';
+    });
+    wire.style.strokeDashoffset=String(1-Math.max(0,(e-.55)/.45));
+    meter.style.setProperty('--p',e);meterN.textContent=Math.round(e*100)+'%';
+  }
+  function progress(){
+    if(reduce)return 1;
+    var r=sec.getBoundingClientRect(),span=sec.offsetHeight-window.innerHeight;
+    return Math.min(1,Math.max(0,-r.top/(span*.8)));
+  }
+
+  /* ---------- Act II: spiral and digits ---------- */
+  var spiral=document.querySelector('#spiral .spiral'),phiSec=document.getElementById('act2'),digits=document.getElementById('digits');
+  var PHI='1,6180339887498948482045868343656381177203091798057628621354486227052604628189024497072072041893911374847540880753868917521266338622235369317931800607667263544333890865959395829056383226613199282902678806752087668925017116962070322210432162695486262963136144';
+  function phiProg(){var r=phiSec.getBoundingClientRect(),h=window.innerHeight;return Math.min(1,Math.max(0,(h-r.top)/(h+r.height*.4)))}
+
+  var ticking=false;
+  function onScroll(){
+    if(ticking)return;ticking=true;
+    requestAnimationFrame(function(){
+      ticking=false;layout(progress());
+      if(!reduce){var q=phiProg();spiral.style.strokeDashoffset=String(1-q);
+        var shown=12+Math.floor(q*48);var s=PHI.slice(0,shown);if(lang==='en')s=s.replace(',','.');digits.textContent=s+'…';}
+    });
+  }
+  spiral.style.strokeDasharray='1';
+  window.addEventListener('scroll',onScroll,{passive:true});window.addEventListener('resize',onScroll);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(onScroll);
+
+  /* ---------- Act V: two doors ---------- */
+  var dc=document.getElementById('door-card'),dr=document.getElementById('door-req'),cw=document.getElementById('cardno-wrap'),card=document.getElementById('r-card');
+  function door(withCard){dc.setAttribute('aria-pressed',withCard);dr.setAttribute('aria-pressed',!withCard);cw.hidden=!withCard;if(!withCard)card.value='';done.hidden=true}
+  dc.onclick=function(){door(true)};dr.onclick=function(){door(false)};
+  card.addEventListener('input',function(){card.value=card.value.replace(/\D/g,'').slice(0,4)});
+
+  /* ---------- form ---------- */
+  var FORM_KEY=''; // Web3Forms access key (public by design)
+  var form=document.getElementById('req-form'),btn=form.querySelector('button[type=submit]');
+  form.addEventListener('submit',function(e){
+    e.preventDefault();
+    var ok=document.getElementById('r-name').value.trim()&&document.getElementById('r-phone').value.trim()&&document.getElementById('r-consent').checked;
+    var say=function(k){done.textContent=msgs[lang][k];done.hidden=false};
+    if(!ok)return say('err');
+    if(!cw.hidden&&card.value.length!==4)return say('card');
+    if(!FORM_KEY)return say('fallback');
+    var fd=new FormData(form);fd.append('access_key',FORM_KEY);fd.append('subject',(cw.hidden?'Αίτημα γνωριμίας':'Κάρτα πρόσκλησης '+card.value)+' · Atelier');fd.append('from_name','Atelier website');
+    btn.disabled=true;
+    fetch('https://api.web3forms.com/submit',{method:'POST',body:fd}).then(function(r){return r.json()}).then(function(j){say(j&&j.success?'ok':'fail');if(j&&j.success)form.reset()})
+      .catch(function(){say('fail')}).then(function(){btn.disabled=false});
+  });
+
+  buildCarvings();
+  try{if(localStorage.getItem('atelier-lang')==='en')set('en')}catch(e){}
+  onScroll();
+})();
+</script>
+
+</body>
+</html>
