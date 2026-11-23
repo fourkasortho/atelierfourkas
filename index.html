@@ -222,49 +222,19 @@ html{-webkit-tap-highlight-color:transparent;-webkit-text-size-adjust:100%}
 .bar .right{display:flex;align-items:center;gap:18px}
 .navx{pointer-events:auto;font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--dust);text-decoration:none;padding:6px 0;border-bottom:1px solid transparent;transition:color .3s,border-color .3s}
 .navx:hover{color:var(--bone);border-bottom-color:var(--gold)}
-.exec{background:#12100D;padding-block:clamp(90px,12vw,160px);position:relative;overflow:hidden;border-top:1px solid var(--vein)}
-.exec::before{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 60% 50% at 78% 40%,rgba(233,180,34,.07),transparent 70%)}
-.exec .grid{display:grid;grid-template-columns:1.618fr 1fr;gap:clamp(32px,5vw,80px);align-items:center;position:relative}
-.exec .text{display:flex;flex-direction:column;gap:22px;min-width:0}
-.exec h2{font-size:clamp(30px,3.4vw,48px);line-height:1.12}
+.exec{background:#12100D;padding-block:clamp(90px,12vw,150px);position:relative;overflow:hidden;border-top:1px solid var(--vein)}
+.exec::before{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 60% 60% at 80% 50%,rgba(233,180,34,.07),transparent 70%)}
+.exec .text{display:flex;flex-direction:column;gap:26px;min-width:0;position:relative;max-width:820px}
+.exec h2{font-size:clamp(32px,4.2vw,60px);line-height:1.1}
 .exec h2 em{font-style:normal;color:var(--gold)}
-.exec .lead{color:#BDB6A9}
-.clauses{list-style:none;margin:10px 0 0;padding:0;border-top:1px solid var(--vein);display:grid;grid-template-columns:1fr 1fr}
-.clauses li{padding:20px 22px 20px 0;display:grid;grid-template-columns:34px 1fr;gap:4px 10px;border-bottom:1px solid var(--vein);min-width:0}
-.clauses li:nth-child(even){padding-left:22px;border-left:1px solid var(--vein)}
-.clauses .n{font-family:var(--display);color:var(--gold-dim);font-size:14px;letter-spacing:.12em;grid-row:span 2;padding-top:4px}
-.clauses h3{font-size:21px;line-height:1.2}
-.clauses p{font-size:14.5px;color:var(--dust)}
-.exec .kit{font-size:14px;color:var(--dust);border-left:1px solid var(--gold-dim);padding-left:16px;max-width:52ch}
-.exec .note{font-size:13px;color:var(--dust)}
-.xbtn{all:unset;cursor:pointer;align-self:flex-start;font-size:12px;letter-spacing:.26em;text-transform:uppercase;border:1px solid var(--gold);color:var(--bone);padding:15px 26px;transition:background .3s,color .3s}
-.xbtn:hover{background:var(--gold);color:var(--night)}
+.xbtn{all:unset;cursor:pointer;align-self:flex-start;font-size:12px;letter-spacing:.26em;text-transform:uppercase;border:1px solid var(--gold);color:var(--bone);padding:15px 30px;transition:background .3s,color .3s}
+.xbtn:hover,.xbtn[aria-expanded="true"]{background:var(--gold);color:var(--night)}
 .xbtn:focus-visible{outline:1px solid var(--bone);outline-offset:3px}
-.phone{justify-self:center;width:min(300px,100%);aspect-ratio:9/18.5;border-radius:38px;border:1px solid #3A3631;background:linear-gradient(160deg,#1B1916,#0B0A09);padding:14px;box-shadow:0 40px 80px -30px rgba(0,0,0,.9),inset 0 0 0 6px #0B0A09;position:relative}
-.phone .scr{height:100%;border-radius:28px;background:var(--night);padding:34px 20px 20px;display:flex;flex-direction:column;gap:14px;overflow:hidden;position:relative}
-.phone .scr::before{content:"";position:absolute;top:10px;left:50%;width:70px;height:18px;margin-left:-35px;border-radius:10px;background:#000}
-.phone .top{display:flex;justify-content:space-between;align-items:center;font-size:9px;letter-spacing:.3em;color:var(--gold-dim)}
-.phone .top svg{width:24px;height:24px;color:var(--bone)}
-.phone .hi{font-family:var(--display);font-size:22px;line-height:1.15}
-.phone .tile{border:1px solid var(--vein);border-radius:12px;padding:12px 14px;display:flex;flex-direction:column;gap:4px}
-.phone .tile small{font-size:8.5px;letter-spacing:.24em;text-transform:uppercase;color:var(--dust)}
-.phone .tile b{font-weight:400;font-size:14px}
-.phone .bars{display:grid;grid-template-columns:repeat(22,1fr);gap:2px;margin-top:6px}
-.phone .bars i{height:5px;background:var(--vein);border-radius:1px}
-.phone .bars i.on{background:var(--gold)}
-.phone .msg{margin-top:auto;border:1px solid var(--gold);border-radius:12px;text-align:center;padding:11px;font-size:9.5px;letter-spacing:.24em;text-transform:uppercase}
-.exec figcaption{text-align:center;font-size:11.5px;color:var(--dust);margin-top:14px;letter-spacing:.04em}
-.exec figure{margin:0;display:flex;flex-direction:column;align-items:center}
-.xopt{grid-column:1/-1;display:flex;gap:10px;align-items:flex-start;font-size:14px;color:var(--dust);text-transform:none;letter-spacing:0}
-.xopt input{width:auto;margin-top:6px;accent-color:var(--gold)}
+.xform{margin-top:8px;border-top:1px solid var(--vein);padding-top:28px}
 @media (max-width:860px){
   .exec{padding-block:72px}
   .exec .act{white-space:normal;flex-wrap:wrap;row-gap:6px}
-  .exec .grid{grid-template-columns:1fr}
-  .clauses{grid-template-columns:1fr}
-  .clauses li:nth-child(even){padding-left:0;border-left:0}
   .xbtn{align-self:stretch;text-align:center;padding:17px 26px}
-  .phone{width:min(260px,78vw)}
   .bar .right{gap:10px}
   .navx{font-size:10px;letter-spacing:.22em;padding:10px 4px}
 }
@@ -395,32 +365,21 @@ html{-webkit-tap-highlight-color:transparent;-webkit-text-size-adjust:100%}
 </div></section>
 
 <!-- Annex: Executive Protocol -->
-<section class="exec" id="executive" aria-labelledby="h-ex"><div class="wrap grid">
+<section class="exec" id="executive" aria-labelledby="h-ex"><div class="wrap">
   <div class="text">
     <div class="act" data-en="ANNEX · EXECUTIVE PROTOCOL">ΠΑΡΑΡΤΗΜΑ · EXECUTIVE PROTOCOL</div>
     <h2 id="h-ex" data-en="Orthodontics for people <em>without time</em>.">Ορθοδοντική για ανθρώπους <em>χωρίς χρόνο</em>.</h2>
-    <p class="lead" data-en="A protocol for adults whose diary is full. Invisible treatment, few visits, and a single person who knows your case and answers your call.">Ένα πρωτόκολλο για ενήλικες με γεμάτο πρόγραμμα. Αόρατη θεραπεία, λίγες επισκέψεις, και ένας άνθρωπος που γνωρίζει την περίπτωσή σας και απαντά στο τηλέφωνό σας.</p>
-    <ol class="clauses">
-      <li><span class="n">I</span><h3 data-en="Invisible">Αόρατη</h3><p data-en="Clear aligners (ICTINUS) or lingual brackets (Alias). Nobody across the table can tell.">Διαφανείς νάρθηκες (ICTINUS) ή γλωσσικά brackets (Alias). Κανείς απέναντί σας στο τραπέζι δεν το καταλαβαίνει.</p></li>
-      <li><span class="n">II</span><h3 data-en="Followed from your phone">Από το κινητό σας</h3><p data-en="You send a few photographs at set intervals. The orthodontist reviews them, so the chair visits are only the necessary ones.">Στέλνετε λίγες φωτογραφίες σε τακτά διαστήματα. Ο ορθοδοντικός τις εξετάζει, ώστε οι επισκέψεις στο ιατρείο να είναι μόνο οι απαραίτητες.</p></li>
-      <li><span class="n">III</span><h3 data-en="Outside office hours">Εκτός ωραρίου</h3><p data-en="Visits early in the morning or in the evening, short and on time, so they fit around your working day.">Επισκέψεις νωρίς το πρωί ή το βράδυ, σύντομες και στην ώρα τους, ώστε να χωρούν γύρω από τη δουλειά σας.</p></li>
-      <li><span class="n">IV</span><h3 data-en="A personal coordinator">Προσωπική συντονίστρια</h3><p data-en="One person arranges every appointment, every change and every question. You have her direct number.">Ένας άνθρωπος κανονίζει κάθε ραντεβού, κάθε αλλαγή και κάθε απορία. Έχετε το απευθείας τηλέφωνό της.</p></li>
-    </ol>
-    <p class="kit" data-en="On the first day you receive a leather aligner case and a card with your coordinator's personal number.">Την πρώτη μέρα παραλαμβάνετε δερμάτινη θήκη για τους νάρθηκες και μια κάρτα με το προσωπικό τηλέφωνο της συντονίστριάς σας.</p>
-    <p class="note" data-en="Executive Protocol places are part of the Atelier's five new treatments each month.">Οι θέσεις του Executive Protocol είναι μέρος των πέντε νέων θεραπειών του μήνα.</p>
-    <button class="xbtn" id="x-go" type="button" data-en="Request the Executive Protocol">Αίτημα για Executive Protocol</button>
+    <button class="xbtn" id="x-go" type="button" aria-expanded="false" aria-controls="x-form" data-en="Ask us">Ρωτήστε μας</button>
+    <form id="x-form" class="xform" novalidate hidden>
+      <div class="f"><label for="x-name" data-en="Full name">Ονοματεπώνυμο</label><input id="x-name" name="name" autocomplete="name" required></div>
+      <div class="f"><label for="x-email">Email</label><input id="x-email" name="email" type="email" autocomplete="email" required></div>
+      <div class="f"><label for="x-phone" data-en="Phone (optional)">Τηλέφωνο (προαιρετικό)</label><input id="x-phone" name="phone" type="tel" autocomplete="tel"></div>
+      <div class="f full"><label for="x-msg" data-en="Your question (optional)">Η ερώτησή σας (προαιρετικό)</label><textarea id="x-msg" name="msg"></textarea></div>
+      <label class="consent" for="x-consent"><input id="x-consent" name="consent" value="ναι" type="checkbox" required> <span data-en="I agree that the practice may use my details only to reply to this question.">Συμφωνώ να χρησιμοποιηθούν τα στοιχεία μου μόνο για την απάντηση σε αυτή την ερώτηση.</span></label>
+      <div><button class="send" type="submit" data-en="Send">Αποστολή</button></div>
+      <div class="status" id="x-done" role="status" hidden></div>
+    </form>
   </div>
-  <figure aria-hidden="true">
-    <div class="phone"><div class="scr">
-      <div class="top"><span>EXECUTIVE PROTOCOL</span><svg viewBox="0 0 1000 1000"><use href="#seal"/></svg></div>
-      <div class="hi" data-en="Good morning.">Καλημέρα σας.</div>
-      <div class="tile"><small data-en="Treatment progress">Πρόοδος θεραπείας</small><b data-en="Aligner 14 of 22">Νάρθηκας 14 από 22</b><div class="bars"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
-      <div class="tile"><small data-en="Next photographs from your phone">Επόμενη φωτογράφιση από το κινητό</small><b data-en="in 3 days">σε 3 ημέρες</b></div>
-      <div class="tile"><small data-en="Next visit">Επόμενη επίσκεψη</small><b data-en="Thursday 19:30">Πέμπτη 19:30</b></div>
-      <div class="msg" data-en="Message your coordinator">Μήνυμα στη συντονίστρια</div>
-    </div></div>
-    <figcaption data-en="Illustrative screen">Ενδεικτική οθόνη</figcaption>
-  </figure>
 </div></section>
 
 <!-- Act V -->
@@ -443,7 +402,6 @@ html{-webkit-tap-highlight-color:transparent;-webkit-text-size-adjust:100%}
       <div class="f"><label for="r-for" data-en="The meeting is for">Η γνωριμία αφορά</label>
         <select id="r-for" name="for"><option data-en="Myself">Εμένα</option><option data-en="My child">Το παιδί μου</option><option data-en="Someone else">Άλλο πρόσωπο</option></select></div>
       <div class="f full"><label for="r-msg" data-en="Anything you would like us to know (optional)">Κάτι που θα θέλατε να γνωρίζουμε (προαιρετικό)</label><textarea id="r-msg" name="msg"></textarea></div>
-      <label class="xopt" for="r-exec"><input id="r-exec" name="executive" value="ναι" type="checkbox"> <span data-en="I am interested in the Executive Protocol">Ενδιαφέρομαι για το Executive Protocol</span></label>
       <label class="consent" for="r-consent"><input id="r-consent" name="consent" value="ναι" type="checkbox" required> <span data-en="I agree that the practice may use my details only to contact me about this request.">Συμφωνώ να χρησιμοποιηθούν τα στοιχεία μου μόνο για την επικοινωνία σχετικά με αυτό το αίτημα.</span></label>
       <div><button class="send" type="submit" data-en="Send">Αποστολή</button></div>
       <div class="status" id="req-done" role="status" hidden></div>
@@ -595,16 +553,25 @@ html{-webkit-tap-highlight-color:transparent;-webkit-text-size-adjust:100%}
   dc.onclick=function(){door(true)};dr.onclick=function(){door(false)};
   card.addEventListener('input',function(){card.value=card.value.replace(/\D/g,'').slice(0,4)});
 
-  /* ---------- Executive: preselect the request ---------- */
-  var xc=document.getElementById('r-exec');
-  document.getElementById('x-go').onclick=function(){
-    xc.checked=true;if(!card.value)door(false);
-    document.getElementById('act5').scrollIntoView({behavior:reduce?'auto':'smooth'});
-    setTimeout(function(){document.getElementById('r-name').focus({preventScroll:true})},reduce?0:700);
-  };
-
   /* ---------- form ---------- */
   var FORM_KEY='8d4a4a7f-d5c9-4518-ae7c-390cebd3ffd5'; // Web3Forms access key (public by design)
+  /* ---------- Executive: ask us ---------- */
+  var xb=document.getElementById('x-go'),xf=document.getElementById('x-form'),xd=document.getElementById('x-done');
+  var xmsg={el:{ok:'Ευχαριστούμε. Θα λάβετε σύντομα στο email σας όλες τις πληροφορίες για το Executive Protocol.',err:'Συμπληρώστε ονοματεπώνυμο και ένα έγκυρο email, και αποδεχτείτε τη χρήση των στοιχείων.'},
+            en:{ok:'Thank you. You will shortly receive all the details of the Executive Protocol by email.',err:'Please fill in your name and a valid email, and agree to the use of your details.'}};
+  xb.onclick=function(){var open=xf.hidden;xf.hidden=!open;xb.setAttribute('aria-expanded',open);if(open)document.getElementById('x-name').focus()};
+  xf.addEventListener('submit',function(e){
+    e.preventDefault();var sb=xf.querySelector('button[type=submit]');
+    var say=function(k){xd.textContent=(xmsg[lang][k]||msgs[lang][k]);xd.hidden=false};
+    var em=document.getElementById('x-email');
+    if(!document.getElementById('x-name').value.trim()||!em.value.trim()||!em.checkValidity()||!document.getElementById('x-consent').checked)return say('err');
+    if(!FORM_KEY)return say('fallback');
+    var fd=new FormData(xf);fd.append('access_key',FORM_KEY);fd.append('subject','Executive Protocol · Ερώτηση · Atelier');fd.append('from_name','Atelier website');
+    sb.disabled=true;
+    fetch('https://api.web3forms.com/submit',{method:'POST',body:fd}).then(function(r){return r.json()}).then(function(j){say(j&&j.success?'ok':'fail');if(j&&j.success)xf.reset()})
+      .catch(function(){say('fail')}).then(function(){sb.disabled=false});
+  });
+
   var form=document.getElementById('req-form'),btn=form.querySelector('button[type=submit]');
   form.addEventListener('submit',function(e){
     e.preventDefault();
@@ -613,7 +580,7 @@ html{-webkit-tap-highlight-color:transparent;-webkit-text-size-adjust:100%}
     if(!ok)return say('err');
     if(!cw.hidden&&card.value.length!==4)return say('card');
     if(!FORM_KEY)return say('fallback');
-    var fd=new FormData(form);fd.append('access_key',FORM_KEY);fd.append('subject',(cw.hidden?'Αίτημα γνωριμίας':'Κάρτα πρόσκλησης '+card.value)+(xc.checked?' · Executive Protocol':'')+' · Atelier');fd.append('from_name','Atelier website');
+    var fd=new FormData(form);fd.append('access_key',FORM_KEY);fd.append('subject',(cw.hidden?'Αίτημα γνωριμίας':'Κάρτα πρόσκλησης '+card.value)+' · Atelier');fd.append('from_name','Atelier website');
     btn.disabled=true;
     fetch('https://api.web3forms.com/submit',{method:'POST',body:fd}).then(function(r){return r.json()}).then(function(j){say(j&&j.success?'ok':'fail');if(j&&j.success)form.reset()})
       .catch(function(){say('fail')}).then(function(){btn.disabled=false});
