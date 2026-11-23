@@ -371,11 +371,12 @@ html{-webkit-tap-highlight-color:transparent;-webkit-text-size-adjust:100%}
     <h2 id="h-ex" data-en="Orthodontics for people <em>without time</em>.">Ορθοδοντική για ανθρώπους <em>χωρίς χρόνο</em>.</h2>
     <button class="xbtn" id="x-go" type="button" aria-expanded="false" aria-controls="x-form" data-en="Ask us">Ρωτήστε μας</button>
     <form id="x-form" class="xform" novalidate hidden>
-      <div class="f"><label for="x-name" data-en="Full name">Ονοματεπώνυμο</label><input id="x-name" name="name" autocomplete="name" required></div>
+      <div class="f"><label for="x-first" data-en="First name">Όνομα</label><input id="x-first" name="first" autocomplete="given-name" required></div>
+      <div class="f"><label for="x-last" data-en="Surname">Επώνυμο</label><input id="x-last" name="last" autocomplete="family-name" required></div>
+      <div class="f"><label for="x-area" data-en="Area">Περιοχή</label><input id="x-area" name="area" autocomplete="address-level2" required></div>
       <div class="f"><label for="x-email">Email</label><input id="x-email" name="email" type="email" autocomplete="email" required></div>
-      <div class="f"><label for="x-phone" data-en="Phone (optional)">Τηλέφωνο (προαιρετικό)</label><input id="x-phone" name="phone" type="tel" autocomplete="tel"></div>
-      <div class="f full"><label for="x-msg" data-en="Your question (optional)">Η ερώτησή σας (προαιρετικό)</label><textarea id="x-msg" name="msg"></textarea></div>
-      <label class="consent" for="x-consent"><input id="x-consent" name="consent" value="ναι" type="checkbox" required> <span data-en="I agree that the practice may use my details only to reply to this question.">Συμφωνώ να χρησιμοποιηθούν τα στοιχεία μου μόνο για την απάντηση σε αυτή την ερώτηση.</span></label>
+      <input type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px">
+      <label class="consent" for="x-consent"><input id="x-consent" name="consent" value="ναι" type="checkbox" required> <span data-en="I agree that the practice may use my details only to reply to this request.">Συμφωνώ να χρησιμοποιηθούν τα στοιχεία μου μόνο για την απάντηση σε αυτό το αίτημα.</span></label>
       <div><button class="send" type="submit" data-en="Send">Αποστολή</button></div>
       <div class="status" id="x-done" role="status" hidden></div>
     </form>
@@ -557,18 +558,26 @@ html{-webkit-tap-highlight-color:transparent;-webkit-text-size-adjust:100%}
   var FORM_KEY='8d4a4a7f-d5c9-4518-ae7c-390cebd3ffd5'; // Web3Forms access key (public by design)
   /* ---------- Executive: ask us ---------- */
   var xb=document.getElementById('x-go'),xf=document.getElementById('x-form'),xd=document.getElementById('x-done');
-  var xmsg={el:{ok:'Ευχαριστούμε. Θα λάβετε σύντομα στο email σας όλες τις πληροφορίες για το Executive Protocol.',err:'Συμπληρώστε ονοματεπώνυμο και ένα έγκυρο email, και αποδεχτείτε τη χρήση των στοιχείων.'},
-            en:{ok:'Thank you. You will shortly receive all the details of the Executive Protocol by email.',err:'Please fill in your name and a valid email, and agree to the use of your details.'}};
-  xb.onclick=function(){var open=xf.hidden;xf.hidden=!open;xb.setAttribute('aria-expanded',open);if(open)document.getElementById('x-name').focus()};
+  var xmsg={el:{ok:'Ευχαριστούμε. Λάβαμε το αίτημά σας και θα σας στείλουμε σύντομα τις πληροφορίες στο email σας.',err:'Συμπληρώστε όνομα, επώνυμο, περιοχή και ένα έγκυρο email, και αποδεχτείτε τη χρήση των στοιχείων.'},
+            en:{ok:'Thank you. We have your request and will shortly send you the details by email.',err:'Please fill in your first name, surname, area and a valid email, and agree to the use of your details.'}};
+  xb.onclick=function(){var open=xf.hidden;xf.hidden=!open;xb.setAttribute('aria-expanded',open);if(open)document.getElementById('x-first').focus()};
   xf.addEventListener('submit',function(e){
     e.preventDefault();var sb=xf.querySelector('button[type=submit]');
     var say=function(k){xd.textContent=(xmsg[lang][k]||msgs[lang][k]);xd.hidden=false};
-    var em=document.getElementById('x-email');
-    if(!document.getElementById('x-name').value.trim()||!em.value.trim()||!em.checkValidity()||!document.getElementById('x-consent').checked)return say('err');
-    if(!FORM_KEY)return say('fallback');
-    var fd=new FormData(xf);fd.append('access_key',FORM_KEY);fd.append('subject','Executive Protocol · Ερώτηση · Atelier');fd.append('from_name','Atelier website');
+    var v=function(id){return document.getElementById(id).value.trim()},em=document.getElementById('x-email');
+    if(!v('x-first')||!v('x-last')||!v('x-area')||!v('x-email')||!em.checkValidity()||!document.getElementById('x-consent').checked)return say('err');
+    var data={first:v('x-first'),last:v('x-last'),area:v('x-area'),email:v('x-email'),lang:lang,botcheck:xf.botcheck.checked?'1':''};
+    var done=function(){say('ok');xf.reset()};
+    var viaW3F=function(){ // fallback: plain notification to the practice
+      if(!FORM_KEY)return say('fallback');
+      var fd=new FormData();fd.append('access_key',FORM_KEY);fd.append('subject','Executive Protocol · '+data.first+' '+data.last+' · '+data.area);fd.append('from_name','Atelier website');
+      fd.append('Όνομα',data.first);fd.append('Επώνυμο',data.last);fd.append('Περιοχή',data.area);fd.append('email',data.email);fd.append('Γλώσσα',lang);
+      return fetch('https://api.web3forms.com/submit',{method:'POST',body:fd}).then(function(r){return r.json()}).then(function(j){if(j&&j.success)done();else say('fail')});
+    };
     sb.disabled=true;
-    fetch('https://api.web3forms.com/submit',{method:'POST',body:fd}).then(function(r){return r.json()}).then(function(j){say(j&&j.success?'ok':'fail');if(j&&j.success)xf.reset()})
+    fetch('/api/executive',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(data)})
+      .then(function(r){return r.ok?r.json():null}).catch(function(){return null})
+      .then(function(j){return j&&j.ok?done():viaW3F()})
       .catch(function(){say('fail')}).then(function(){sb.disabled=false});
   });
 
