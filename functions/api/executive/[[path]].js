@@ -12,6 +12,7 @@
 //   - Workers Paid plan, and atelierfourkas.com onboarded in Email Service > Email Sending
 //   - Pages secret CF_EMAIL_TOKEN: an API token allowed to send email (also used as the signing key)
 //   - optional variable CF_ACCOUNT_ID (defaults to the account below)
+//   Secrets only reach the site on the next deployment: after changing CF_EMAIL_TOKEN, redeploy.
 
 const ACCOUNT_ID = '353bc0840f8f901e8c693d6e453d29db';
 const SITE = 'https://atelierfourkas.com';
