@@ -17,8 +17,10 @@
 const ACCOUNT_ID = '353bc0840f8f901e8c693d6e453d29db';
 const SITE = 'https://atelierfourkas.com';
 const FROM = { address: 'executive@atelierfourkas.com', name: 'Atelier Ορθοδοντικής Φούρκα' };
-const OWNER = 'fourkas@outlook.com';
-const LINK_DAYS = 60;
+const OWNER = 'fourkas@outlook.com'; // Reply-To on the info email; also receives the approval email
+// Extra approval recipients: Pages variable APPROVER_EMAILS (comma-separated).
+const approvers = (env) => [OWNER, ...String(env.APPROVER_EMAILS || '').split(',').map((x) => x.trim()).filter(Boolean)];
+const LINK_DAYS = 14;
 
 const COPY = {
   el: {
@@ -134,25 +136,47 @@ async function submit(request, env) {
   const link = `${SITE}/api/executive/approve?t=${await sign(env.CF_EMAIL_TOKEN, r)}`;
   const rows = [['Όνομα', r.first], ['Επώνυμο', r.last], ['Περιοχή', r.area], ['Email', r.email]];
   const ok = await sendMail(env, {
-    to: OWNER,
+    to: approvers(env),
     reply_to: r.email,
     subject: `Executive Protocol · ${r.first} ${r.last} · ${r.area}`,
-    text: `Νέο αίτημα πληροφοριών για το Executive Protocol.\n\n${rows.map(([k, v]) => `${k}: ${v}`).join('\n')}\n\nΓια να σταλεί η αυτόματη απάντηση, ανοίξτε τον σύνδεσμο και πατήστε «Αποστολή»:\n${link}\n\nΑν δεν εγκρίνετε, απλώς αγνοήστε αυτό το email.`,
-    html: `<div style="font:15px/1.6 Helvetica,Arial,sans-serif;color:#1a1a1a;max-width:520px"><p style="font-size:12px;letter-spacing:.2em;color:#8a6d1f">EXECUTIVE PROTOCOL · ΝΕΟ ΑΙΤΗΜΑ</p><table style="border-collapse:collapse;margin:12px 0 24px">${rows.map(([k, v]) => `<tr><td style="padding:4px 18px 4px 0;color:#777">${k}</td><td style="padding:4px 0"><b>${esc(v)}</b></td></tr>`).join('')}</table><p><a href="${link}" style="display:inline-block;background:#E9B422;color:#0E0D0C;text-decoration:none;padding:14px 26px;letter-spacing:.18em;font-size:13px">ΕΓΚΡΙΣΗ</a></p><p style="color:#777;font-size:13px">Ο σύνδεσμος ανοίγει μια σελίδα με τα στοιχεία· η απάντηση φεύγει μόνο όταν πατήσετε «Αποστολή». Αν δεν εγκρίνετε, αγνοήστε αυτό το email.</p></div>`,
+    text: `Νέο αίτημα πληροφοριών για το Executive Protocol.\n\n${rows.map(([k, v]) => `${k}: ${v}`).join('\n')}\n\nΓια να σταλεί η αυτόματη απάντηση, ανοίξτε τον σύνδεσμο, τσεκάρετε την επιβεβαίωση και πατήστε «Αποστολή» (ισχύει 14 ημέρες, μία φορά):\n${link}\n\nΑν δεν εγκρίνετε, απλώς αγνοήστε αυτό το email.`,
+    html: `<div style="font:15px/1.6 Helvetica,Arial,sans-serif;color:#1a1a1a;max-width:520px"><p style="font-size:12px;letter-spacing:.2em;color:#8a6d1f">EXECUTIVE PROTOCOL · ΝΕΟ ΑΙΤΗΜΑ</p><table style="border-collapse:collapse;margin:12px 0 24px">${rows.map(([k, v]) => `<tr><td style="padding:4px 18px 4px 0;color:#777">${k}</td><td style="padding:4px 0"><b>${esc(v)}</b></td></tr>`).join('')}</table><p><a href="${link}" style="display:inline-block;background:#E9B422;color:#0E0D0C;text-decoration:none;padding:14px 26px;letter-spacing:.18em;font-size:13px">ΕΓΚΡΙΣΗ</a></p><p style="color:#777;font-size:13px">Ο σύνδεσμος ανοίγει μια σελίδα με τα στοιχεία. Η απάντηση φεύγει μόνο όταν τσεκάρετε την επιβεβαίωση και πατήσετε «Αποστολή», μία φορά. Ισχύει 14 ημέρες. Αν δεν εγκρίνετε, αγνοήστε αυτό το email.</p></div>`,
   });
   return ok ? json({ ok: true }) : json({ ok: false, error: 'send' }, 502);
 }
 
+// Best-effort single use: remember sent links in the edge cache (per data centre) for the link lifetime.
+const usedKey = (token) => new Request(`${SITE}/__executive_used/${encodeURIComponent(String(token).split('.')[1] || '')}`);
+async function wasUsed(token) { try { return !!(await caches.default.match(usedKey(token))); } catch { return false; } }
+async function markUsed(token) {
+  try { await caches.default.put(usedKey(token), new Response('1', { headers: { 'cache-control': `public, max-age=${LINK_DAYS * 86400}` } })); } catch {}
+}
+
 async function approve(request, env, url) {
   if (!env.CF_EMAIL_TOKEN) return page('Executive', '<h1>Η υπηρεσία δεν έχει ρυθμιστεί.</h1>', 503);
-  const token = request.method === 'POST' ? (await request.formData()).get('t') : url.searchParams.get('t');
+  const form = request.method === 'POST' ? await request.formData() : null;
+  const token = form ? form.get('t') : url.searchParams.get('t');
   const r = await verify(env.CF_EMAIL_TOKEN, token).catch(() => null);
   if (!r) return page('Executive', '<h1>Ο σύνδεσμος δεν ισχύει ή έχει λήξει.</h1>', 400);
+  const used = await wasUsed(token);
   if (request.method !== 'POST') {
-    return page('Έγκριση · Executive', `<h1>Να σταλούν οι πληροφορίες του Executive Protocol;</h1>${details(r)}<form method="post"><input type="hidden" name="t" value="${esc(token)}"><button type="submit">Αποστολή</button></form><p style="font-size:14px;margin-top:18px">Αν πατήσετε δεύτερη φορά, το email θα σταλεί ξανά.</p>`);
+    if (used) return page('Executive', `<h1>Έχει ήδη σταλεί.</h1><p>Οι πληροφορίες στάλθηκαν ήδη στο ${esc(r.email)}.</p>${details(r)}`);
+    // Two deliberate steps (tick + press), and the form only gets its token from a real click,
+    // so mail-security scanners that open links or submit forms cannot send anything.
+    return page('Έγκριση · Executive', `<h1>Να σταλούν οι πληροφορίες του Executive Protocol;</h1>${details(r)}
+<form method="post" id="f"><input type="hidden" name="h" value=""><input type="hidden" name="t" value="">
+<label style="display:flex;gap:12px;align-items:flex-start;margin:0 0 22px;font-size:16px;color:#BDB6A9;text-transform:none;letter-spacing:0"><input type="checkbox" id="c" style="width:22px;height:22px;accent-color:#E9B422;margin-top:2px"> Επιβεβαιώνω την αποστολή στο ${esc(r.email)}</label>
+<button type="submit" id="b" disabled style="opacity:.4">Αποστολή</button></form>
+<script>var c=document.getElementById('c'),b=document.getElementById('b'),f=document.getElementById('f');
+c.onchange=function(){b.disabled=!c.checked;b.style.opacity=c.checked?1:.4};
+f.onsubmit=function(e){if(!e.isTrusted||!c.checked){e.preventDefault();return}f.t.value=${JSON.stringify(String(token))};f.h.value='1';b.disabled=true;b.textContent='Αποστολή…'};</script>`);
   }
+  if (form.get('h') !== '1') return page('Executive', '<h1>Δεν στάλθηκε.</h1><p>Ανοίξτε ξανά τον σύνδεσμο, τσεκάρετε την επιβεβαίωση και πατήστε «Αποστολή».</p>', 400);
+  if (used) return page('Executive', `<h1>Έχει ήδη σταλεί.</h1><p>Οι πληροφορίες στάλθηκαν ήδη στο ${esc(r.email)}.</p>`);
   const msg = buildReply(r);
   const ok = await sendMail(env, { to: r.email, reply_to: OWNER, ...msg });
+  console.log('executive approve', ok ? 'sent' : 'failed', new Date(r.ts).toISOString(), request.headers.get('user-agent'));
+  if (ok) await markUsed(token);
   return ok
     ? page('Εστάλη · Executive', `<h1>Εστάλη.</h1><p>Οι πληροφορίες για το Executive Protocol στάλθηκαν στο ${esc(r.email)}.</p>`)
     : page('Σφάλμα · Executive', '<h1>Η αποστολή απέτυχε.</h1><p>Δοκιμάστε ξανά σε λίγο από τον ίδιο σύνδεσμο.</p>', 502);
