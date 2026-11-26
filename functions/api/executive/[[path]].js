@@ -36,7 +36,6 @@ const COPY = {
       ['Επισκέψεις εκτός ωραρίου', 'Νωρίς το πρωί ή το βράδυ, σύντομες και στην ώρα τους, ώστε να χωρούν γύρω από τη δουλειά σας.'],
       ['Προσωπική συντονίστρια', 'Ένας άνθρωπος κανονίζει κάθε ραντεβού, κάθε αλλαγή και κάθε απορία. Έχετε το απευθείας τηλέφωνό της.'],
     ],
-    kit: 'Την πρώτη μέρα παραλαμβάνετε δερμάτινη θήκη για τους νάρθηκες και μια κάρτα με το προσωπικό τηλέφωνο της συντονίστριάς σας.',
     five: 'Οι θέσεις του Executive Protocol είναι μέρος των πέντε νέων θεραπειών που ξεκινούν κάθε μήνα στο Atelier.',
     next: 'Για μια πρώτη γνωριμία, απαντήστε σε αυτό το email ή καλέστε στο 210 623 3398.',
     sign: ['Atelier Ορθοδοντικής Φούρκα', 'Κυριαζή 6, 145 62 Κηφισιά', 'fourkas@outlook.com · atelierfourkas.com'],
@@ -52,7 +51,6 @@ const COPY = {
       ['Outside office hours', 'Visits early in the morning or in the evening, short and on time, so they fit around your working day.'],
       ['A personal coordinator', 'One person arranges every appointment, every change and every question. You have her direct number.'],
     ],
-    kit: "On the first day you receive a leather aligner case and a card with your coordinator's personal number.",
     five: 'Executive Protocol places are part of the five new treatments that begin at the Atelier each month.',
     next: 'For a first meeting, reply to this email or call +30 210 623 3398.',
     sign: ['Atelier · Fourkas Orthodontics', '6 Kyriazi St, 145 62 Kifisia, Greece', 'fourkas@outlook.com · atelierfourkas.com'],
@@ -68,7 +66,7 @@ export function buildReply(req) {
   const name = `${req.first} ${req.last}`.trim();
   const text = [c.hello(name), '', c.thanks, '', c.intro, '',
     ...c.items.flatMap(([h, p], i) => [`${ROMAN[i]}. ${h}`, p, '']),
-    c.kit, '', c.five, '', c.next, '', '—', ...c.sign].join('\n');
+    c.five, '', c.next, '', '—', ...c.sign].join('\n');
   const sans = 'font-family:Helvetica,Arial,sans-serif';
   const html = `<!doctype html><html lang="${req.lang === 'en' ? 'en' : 'el'}"><body style="margin:0;background:#0E0D0C">
 <div style="max-width:560px;margin:0 auto;padding:40px 28px;font-family:Georgia,'Times New Roman',serif;color:#ECE6DA;background:#0E0D0C">
@@ -77,7 +75,6 @@ export function buildReply(req) {
 <p style="${sans};font-size:15px;line-height:1.7;color:#BDB6A9;margin:0 0 12px">${c.thanks}</p>
 <p style="${sans};font-size:15px;line-height:1.7;color:#BDB6A9">${c.intro}</p>
 ${c.items.map(([h, p], i) => `<div style="border-top:1px solid #2A2825;padding:16px 0"><div style="font-size:18px"><span style="color:#B8933A;font-size:13px;letter-spacing:.12em;margin-right:12px">${ROMAN[i]}</span>${h}</div><div style="${sans};font-size:14px;line-height:1.6;color:#8F887C;margin-top:4px">${p}</div></div>`).join('\n')}
-<p style="${sans};font-size:14px;line-height:1.6;color:#8F887C;border-left:1px solid #B8933A;padding-left:14px;margin:22px 0">${c.kit}</p>
 <p style="${sans};font-size:14px;line-height:1.6;color:#8F887C">${c.five}</p>
 <p style="${sans};font-size:15px;line-height:1.6;color:#ECE6DA;margin-top:22px">${c.next}</p>
 <div style="border-top:1px solid #2A2825;margin-top:30px;padding-top:16px;${sans};font-size:12px;line-height:1.7;color:#8F887C">${c.sign.join('<br>')}</div>
