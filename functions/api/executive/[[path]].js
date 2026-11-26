@@ -21,6 +21,8 @@ const OWNER = 'fourkas@outlook.com'; // Reply-To on the info email; also receive
 // Extra approval recipients: Pages variable APPROVER_EMAILS (comma-separated).
 const approvers = (env) => [OWNER, ...String(env.APPROVER_EMAILS || '').split(',').map((x) => x.trim()).filter(Boolean)];
 const LINK_DAYS = 14;
+// Links issued before this moment are void (they could be reused before single-use existed).
+const NOT_BEFORE = Date.parse('2026-11-26T17:30:00Z');
 
 const COPY = {
   el: {
@@ -103,7 +105,7 @@ export async function verify(secret, token) {
   let diff = 0; for (let i = 0; i < want.length; i++) diff |= want.charCodeAt(i) ^ sig.charCodeAt(i);
   if (diff) return null;
   const req = JSON.parse(new TextDecoder().decode(unb64u(body)));
-  if (Date.now() - req.ts > LINK_DAYS * 864e5) return null;
+  if (Date.now() - req.ts > LINK_DAYS * 864e5 || !(req.ts >= NOT_BEFORE)) return null;
   return req;
 }
 
