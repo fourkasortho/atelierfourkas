@@ -571,7 +571,7 @@ html{-webkit-tap-highlight-color:transparent;-webkit-text-size-adjust:100%}
     var viaW3F=function(){ // fallback: plain notification to the practice
       if(!FORM_KEY)return say('fallback');
       var fd=new FormData();fd.append('access_key',FORM_KEY);fd.append('subject','Executive Protocol · '+data.first+' '+data.last+' · '+data.area);fd.append('from_name','Atelier website');
-      fd.append('Όνομα',data.first);fd.append('Επώνυμο',data.last);fd.append('Περιοχή',data.area);fd.append('email',data.email);fd.append('Γλώσσα',lang);
+      fd.append('Onoma',data.first);fd.append('Eponymo',data.last);fd.append('Perioxi',data.area);fd.append('email',data.email);fd.append('Glossa',lang);
       return fetch('https://api.web3forms.com/submit',{method:'POST',body:fd}).then(function(r){return r.json()}).then(function(j){if(j&&j.success)done();else say('fail')});
     };
     sb.disabled=true;
